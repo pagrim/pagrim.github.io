@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Peter Grimshaw&#39;s Site</title>
-    <link>https://pagrim.github.io/post/</link>
-    <description>Recent content in Posts on Peter Grimshaw&#39;s Site</description>
+    <title>Web-Dev on Peter Grimshaw&#39;s Site</title>
+    <link>https://pagrim.github.io/tags/web-dev/</link>
+    <description>Recent content in Web-Dev on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo</generator>
     <language>en-gb</language>
     <lastBuildDate>Thu, 04 Jul 2024 11:44:08 +0100</lastBuildDate>
-    <atom:link href="https://pagrim.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pagrim.github.io/tags/web-dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up my Blog with Hugo</title>
       <link>https://pagrim.github.io/post/website_setup/</link>
       <pubDate>Thu, 04 Jul 2024 11:44:08 +0100</pubDate>
       <guid>https://pagrim.github.io/post/website_setup/</guid>
       <description>Since I set up this site earlier this month I thought it would be nice to share my experience setting up this blog. Here’s how I did it using the Hugo static site generator framework.&#xA;Why Hugo? I was on the lookout for a way to get a blog site up and running, which met my criteria:&#xA;Simple post creation Simple hosting solution Minimal HTML/CSS/front end dev Easy to include additional static pages After some research, I found that using Hugo to generate content and hosting on github pages was the perfect fit.</description>
-    </item>
-    <item>
-      <title>The Courage To Be Disliked</title>
-      <link>https://pagrim.github.io/post/courage_to_be_disliked/</link>
-      <pubDate>Thu, 06 Jun 2024 10:46:13 +0100</pubDate>
-      <guid>https://pagrim.github.io/post/courage_to_be_disliked/</guid>
-      <description>I re-read The Courage to be Disliked recently and wanted to share some of the amazing insights I learned from it. The book is about a conversation between a philosopher and a youth, based on similar style texts written by Plato about dialogues with Socrates. The philosopher is a follower of the psychology of Alfred Adler, who is the least well known of the three giants of psychology; Freud, Jung and Adler.</description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Setting up my Blog with Hugo | Peter Grimshaw&#39;s Site</title>
+    <meta name="description" content="Setting up my Blog with Hugo">
+    <meta property="og:site_name" content="Setting up my Blog with Hugo" />
+    <meta property="og:title" content="Peter Grimshaw&#39;s Site" />
+    <meta property="og:description" content="Since I set up this site earlier this month I thought it would be nice to share my experience setting up this blog. Here’s how I did it using the Hugo static site generator framework.
+Why Hugo? I was on the lookout for a way to get a blog site up and running, which met my criteria:
+Simple post creation Simple hosting solution Minimal HTML/CSS/front end dev Easy to include additional static pages After some research, I found that using Hugo to generate content and hosting on github pages was the perfect fit." />
+    <meta property="og:image" content="https://pagrim.github.io/img/peter.jpg" />
+    <meta name="keywords"
+          content="" />
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+        integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+          crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+        integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+        crossorigin="anonymous">
+    </script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);">
+    </script>
+    
+    <meta name="keywords" content="fast, hugo, theme, minimal, gruvbox">
+    <link rel="icon" type="image/svg" href='https://pagrim.github.io/img/logo.png' />
+    <meta name="author" content='peter_grimshaw'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.126.2">
+    
+    <link rel="stylesheet" href="https://pagrim.github.io/sass/main.min.e4732d6df598be088fd42303a85eb416b51788261c37ad61e22a6c43d38facc4.css" type="text/css" media="screen">
+
+    <link rel="stylesheet" href="https://pagrim.github.io/css/style.css">
+
+    
+
+    
+    </head>
+<body>
+      <div class="line" id="scrollIndicator"></div>
+      <div class="main"><div class="title">
+  <div class="name">
+    <h2><a href="https://pagrim.github.io/"
+	   style="text-decoration: none; color: inherit;">Peter Grimshaw</a></h2>
+  </div>
+  <div class="color-scheme">
+    <input type="checkbox" class="checkbox" id="chk" />
+    <label class="label" for="chk">
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg>
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 160c-52.9 0-96 43.1-96
+										96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path></svg>
+      <div class="ball"></div>
+    </label>
+  </div>
+</div>
+<script>
+  const themeSetter = (theme) => {
+      document.body.classList.toggle('dark')
+      localStorage.setItem('theme', theme)
+      blockSwitcher()
+  }
+
+  const blockSwitcher = () => [...document.getElementsByTagName("BLOCKQUOTE")]
+	.forEach(b => b.classList.toggle('dark'))
+
+  const styleSwapper = () => {
+      document.body.classList.add('back-transition')
+      if (localStorage.getItem('theme') === 'dark') themeSetter('light')
+      else if (localStorage.getItem('theme') === 'light') themeSetter('dark')
+  }
+
+  if (localStorage.getItem('theme') === 'dark'){
+      themeSetter('dark')
+      document.addEventListener("DOMContentLoaded", blockSwitcher)
+  }
+ else localStorage.setItem('theme', 'light')
+
+  document.getElementById('chk').addEventListener('change',styleSwapper);
+
+  window.addEventListener("scroll", () => {
+      let height = document.documentElement.scrollHeight
+          - document.documentElement.clientHeight;
+      if(height >= 500){
+	  let winScroll = document.body.scrollTop
+              || document.documentElement.scrollTop;
+	  let scrolled = (winScroll / height) * 100;
+	  document.getElementById("scrollIndicator").style.width = scrolled + "%";
+      }
+  });
+</script>
+
+<section class="intro">
+  
+  <div class="post-header">
+    <a class="go-back" href="https://pagrim.github.io/"><svg aria-hidden="true" focusable="false" data-prefix="far" class="back-icon" data-icon="caret-square-left" height="25px" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M272 157.1v197.8c0 10.7-13 16.1-20.5 8.5l-98.3-98.9c-4.7-4.7-4.7-12.2 0-16.9l98.3-98.9c7.5-7.7 20.5-2.3 20.5 8.4zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg> </a>
+    <h2 class="post-title">Setting up my Blog with Hugo</h2>
+</div>
+
+<p class="post-dets">Published on: July 4, 2024
+  | Reading Time: 4 min | Last Modified: July 4, 2024
+  <br>
+</p>
+<span class="tags">
+  
+  <h5><a class="tag" href='https://pagrim.github.io/tags/web-dev'>web-dev</a></h5>
+  
+  <h5><a class="tag" href='https://pagrim.github.io/tags/hugo'>hugo</a></h5>
+  
+  <h5><a class="tag" href='https://pagrim.github.io/tags/blog'>blog</a></h5>
+  
+</span>
+
+<div class="content">
+  <p>Since I set up this site earlier this month I thought it would be nice to share my experience setting up this blog. Here’s how I did it using the <a href="https://gohugo.io">Hugo static site generator framework</a>.</p>
+<h1 id="why-hugo">Why Hugo?</h1>
+<p>I was on the lookout for a way to get a blog site up and running, which met my criteria:</p>
+<ul>
+<li>Simple post creation</li>
+<li>Simple hosting solution</li>
+<li>Minimal HTML/CSS/front end dev</li>
+<li>Easy to include additional static pages</li>
+</ul>
+<p>After some research, I found that using Hugo to generate content and hosting on github pages was the perfect fit. Hugo is a powerful framework for creating static sites and blogs, requiring only some basic development skills. The only things you need to know for Hugo are</p>
+<ul>
+<li>Git</li>
+<li>YAML</li>
+<li>Markdown</li>
+</ul>
+<p>If you have these skills, getting started with Hugo is a simple. Of these, I think git is the main barrier, but anyone with a little git experience should be fine.</p>
+<p>If you have a github account you will easily be able to host your own blog via github pages, and it&rsquo;s super simple to deploy.</p>
+<h1 id="getting-started-with-hugo">Getting Started with Hugo</h1>
+<p>How to set up the blog wasn’t immediately obvious, but it&rsquo;s feasible to get everything up and running in a few hours.</p>
+<p>Hugo simplifies the process of creating a static site. The heavy lifting is done by the theme you choose, meaning you don’t need to code in Go, although I’d be happy to have a Go at that! ;)</p>
+<p>It&rsquo;s important to note that you need to choose a theme for your site. This has advantages because the theme handles all of the HTML/CSS stuff for you, but it also can impose some limitations, assuming you don&rsquo;t want to go ahead and edit the theme. I chose <a href="https://gitlab.com/avron/gruvhugo">gruvhugo</a> because I liked the look and it aligned with my requirements. It&rsquo;s worth shopping around for a while; you can see <a href="https://themes.gohugo.io">available themes here</a>.</p>
+<p>The main task is configuring the <code>hugo.toml</code> file, which defines the settings and structure of your site. For a quick start, there’s an excellent <a href="https://www.youtube.com/watch?v=LIFvgrRxdt4">10-minute introduction</a> to setting up a site with Hugo by Ryan Schachte.</p>
+<h1 id="repository-set-up">Repository Set Up</h1>
+<p>This is the part that sounds a little complex, so I&rsquo;ll explain in a bit of detail here.</p>
+<ul>
+<li>You need to host your blog code in a repo, let&rsquo;s call it <code>myblog</code></li>
+<li>If you want to take advantage of github pages for deployment and hosting you need to commit the static files generated by Hugo to the repo corresponding to your github pages. This repo needs to be named <code>username.github.io</code>, so in my case <code>pagrim.github.io</code>. This will also be the url of your blog.</li>
+<li>In order to make it easy to commit the static files, you can add your <code>username.github.io</code> repo as a submodule of your <code>myblog</code> repo at the <code>public</code> directory. In other words, you&rsquo;ll be running this command <code>git submodule add username.github.io public</code>. The reason for choosing the <code>public</code> directory is that this is where Hugo will store static files when you generate them (by default)</li>
+<li>The simplest way to add themes is often to add your theme <code>mytheme</code> as a submodule of your <code>myblog</code> repo, this time at the <code>themes/mytheme</code> directory. As a side note, I did decide to amend the theme very slightly so I added a forked version of the theme on my own github and added that as the submodule. Of course, if you take the theme as-is, there&rsquo;s no need for this.</li>
+</ul>
+<p>Initially, I considered using Continuous Integration (CI) for deployment instead, but once I worked through the above setup everything was very smooth.</p>
+<h1 id="local-development--writing">Local Development &amp; Writing</h1>
+<p>I made extensive use of Hugo’s local server to preview the end result of my site as I worked on it. This was incredibly helpful for ensuring everything looked and functioned as expected before publishing.</p>
+<p>I initially wrote this post as a series of bullet points and asked ChatGPT to turn those into full sentences, although I edited the output a lot before publishing. Based on this experiment it seems like a great way to remove the heavy-lifting of writing a long post but still ensuring the content reflects my personal opinions :)</p>
+<h1 id="final-thoughts">Final Thoughts</h1>
+<p>I’m extremely happy with the final result of my blog site. Hugo made the process smooth and enjoyable. Whilst I might explore other options in the future to add more features or flexibility, the current setup is an excellent starting point.</p>
+<p>If you’re looking to create a blog site quickly and efficiently, I highly recommend giving Hugo a try. With its ease of use and powerful features, it’s a fantastic choice for anyone wanting to share their thoughts and experiences online.</p>
+<p>Happy blogging!</p>
+
+</div>
+
+</section>
+<footer id="footer">
+    <strong></strong>
+    <div class="social">
+        &nbsp;
+<a href="https://github.com/pagrim" target="_blank" rel="me" title="Github" referrerpolicy="no-referrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+	stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<path
+		d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+	</path>
+</svg>
+</a>
+&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/petergrimshaw/" target="_blank" rel="me" title="Linkedin" referrerpolicy="no-referrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+	stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+	<rect x="2" y="9" width="4" height="12"></rect>
+	<circle cx="4" cy="4" r="2"></circle>
+</svg>
+</a>
+&nbsp;
+    </div><strong></strong>
+    <p style="color:grey;">© 2024 Peter Grimshaw  <a href="https://creativecommons.org/licenses/by/4.0/">Some rights reserved</a>.</p>
+</footer>
+</div>
+    </body>
+</html>
