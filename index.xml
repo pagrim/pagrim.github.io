@@ -6,7 +6,104 @@
     <description>Recent posts from on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 04 Jul 2024 11:44:08 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Aug 2024 18:25:09 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>One Person, Two Wheels and a Tent</title>
+      <link>https://pagrim.github.io/post/bike-tour/</link>
+      <pubDate>Sun, 11 Aug 2024 18:25:09 +0100</pubDate>
+      
+      <guid>https://pagrim.github.io/post/bike-tour/</guid>
+      <description>&lt;p&gt;The last couple of months I have been planning a bike tour, and I just came back from the ride so I wanted to write about the whole experience!&lt;/p&gt;
+&lt;h2 id=&#34;planning-and-preparation&#34;&gt;Planning and Preparation&lt;/h2&gt;
+&lt;p&gt;I have done a bike tour previously with an old-school touring bike, but that time I booked accommodation each night (a.k.a credit-card touring). This time I wanted to carry my own gear. Depending on your perspective I made the task a lot harder for myself by deciding to sell that old-school touring bike as I didn&amp;rsquo;t like the feel of riding it. It was a nice-looking bike but for me the handlebars and the diameter of the handlebars felt too narrow. I decided to get a new and cooler gravel bike!&lt;/p&gt;
+&lt;p&gt;It took me a while to get the bike, but it took quite a bit longer to kit it out appropriately for touring. I managed to source a good quality gravel bike (Kinesis Crosslight Pro 6) from ebay for quite a good price. At first I wasn&amp;rsquo;t sure if the bike sizing was good, so I did quite a bit of testing with that. After raising the saddle a couple of times and eventually deciding I didn&amp;rsquo;t need to mess with the handlebar height, I was happy the bike fitted. I knew I wanted to go off-road so the very smooth and narrow tyres already on the bike weren&amp;rsquo;t going to work. After speaking to most of the bike shops in our nearest high street and realising touring tyres might work better than gravel tyres, I bought two 35c Michelin touring tyres. The trickiest part of fitting those was getting the existing tubeless tyres off whilst not making an enormous mess. If you don&amp;rsquo;t know tubeless tyres normally have a (usually colourful) sealant inside which quickly seals any punctures on the tyre, which makes removing them quite messy.&lt;/p&gt;
+&lt;p&gt;Aside from the bike and the tyres there were a few other things I needed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A route. I adapted a route I found on Komoot app which was following with National Cycle route 4. The whole route is a bit longer than I wanted so I use Komoot&amp;rsquo;s route planner to create my own truncated version.&lt;/li&gt;
+&lt;li&gt;Tent to sleep in. I got the OEX Phoexx II 2 man tent. You can see some reviews here, but for me this worked really well. It&amp;rsquo;s light and super easy to assemble.&lt;/li&gt;
+&lt;li&gt;Shoes I could walk and ride in. I bought these Giro Privateer mountain bike shoes which looked pretty waterproof. They were very comfortable to wear all day and easy to walk around in. I haven&amp;rsquo;t tested how waterproof they are &amp;hellip; yet!&lt;/li&gt;
+&lt;li&gt;Panniers to load gear into. I got these pannier bags from Amazon. I liked them mainly because they were waterproof and looked very durable. I can say even after 3 days of riding they really are very robust. They are not even slightly damaged after a tour in which the bike and panniers fell over twice and they hit a fair few plants on the canal paths.&lt;/li&gt;
+&lt;li&gt;A frame bag or handlebar bag for small items. This last-minute purchase from Halfords worked really well&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All of these took a while in various ways, but I&amp;rsquo;m quite happy with everything I planned!&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/bike.jpg&#34;
+    alt=&#34;The bike after adaptations&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;The final product after alterations&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;the-tour&#34;&gt;The Tour&lt;/h2&gt;
+&lt;p&gt;My aim was to ride from home (West London) to Bath (south-west of the UK) following an adapted version of national cycle route four, which is about 140 miles in total. The route meandered around south London, roughly following the river Thames, before reaching Windsor, then wound towards Reading in a roundabout-fashion, before heading more directly West along the Kennet and Avon Canal. I camped overnight twice, once at Windsor and once around Pewsey in Wiltshire, which meant that the first and third days were around 40 miles while the second day was around 60 miles.&lt;/p&gt;
+&lt;h3 id=&#34;day-1-west-london---maidenhead&#34;&gt;Day 1: West London - Maidenhead&lt;/h3&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/starting.jpg&#34;
+    alt=&#34;Starting out&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Starting out&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I was a bit nervous when starting as I had put lots of effort into planning! I had tested every part of it, but not all of it together. To use a software engineering analogy, I had run unit tests but no integration tests! In the end, I had no issues.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/kingston.jpg&#34;
+    alt=&#34;Thames at Kingston&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;The river Thames at Kingston&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The route started out through some nice areas like Richmond Park and then joined the Thames at Kingston. It was pretty uneventful and pleasant until I encountered a steep lane that very quickly became steeper, narrower and rockier&amp;hellip; I tried battling my way up but unfortunately, the bike, the panniers and I eventually went tumbling into the side of the lane and my knee took a hit. Luckily I had everything I needed carry on (antisceptic wipe, dressing and some tape), so pushed the bike to the top of the hill and sorted out my wounds. I pedalled onwards at the top of the hill, gingerly at first. Nevertheless, I continued through Weybridge, Egham and Windsor and then around the rowing lake at Dorney reach until I was almost at Maidenhead. I was lucky to go through lots of beautiful areas on a very sunny day, including Richmond Park, and most places along the Thames but the nicest one was Windsor Great Park, which included an amazing view down to Windsor Castle from the Park along the Long Walk.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/windsor_castle.jpg&#34;
+    alt=&#34;Windsor Castle from the Long Walk&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Windsor Castle from the Long Walk&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I realised on the first evening that I really loved the sense of freedom from carrying everything on a bike. Camping also gave me a sense of freedom and a bit of nostalgia since I hadn&amp;rsquo;t done that for such a long time! I stopped at Amerden Caravan Park, which had really great facilities including charging points and showers.&lt;/p&gt;
+&lt;h3 id=&#34;day-2&#34;&gt;Day 2&lt;/h3&gt;
+&lt;p&gt;I decided not to bring any cooking equipment with me. This did mean that couldn&amp;rsquo;t have any tea in the morning (very British problem), so I was happy to take a tea break in the centre of Reading where the Olympics was also being screened.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/reading.jpg&#34;
+    alt=&#34;Olympics at Reading town centre&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Olympics at Reading town centre&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I knew this day would be quite a long ride, but it felt quite a bit shorter since I met a nice guy called Max, shortly after joining the Kennet and Avon canal at Reading. He had cycled from Germany through the Netherlands to the UK, and was making his way from Dover to Bristol, cycling much of this barefoot! We were heading the same way, so cycled together and over the next Day and a half, he told me about his experiences of cycling across Europe, including being threatened by a Dutch farmer when wild camping! He was an expert in bike mechanics and also really good at making friends.&lt;/p&gt;
+&lt;p&gt;We stopped in Newbury for lunch, and then continued further down the Kennet and Avon canal past Hungerford and towards Burbage, near Pewsey, where we both camped that evening. The campsite was a really friendly environment and there was another group of cyclists there already whom I spoke to a bit too, plus a guy who seemed to have cycled everywhere in Europe and had some good advice to give.&lt;/p&gt;
+&lt;p&gt;I was exhausted that evening, but happy to have met Max and other fellow bike tourers.&lt;/p&gt;
+&lt;h3 id=&#34;day-3&#34;&gt;Day 3&lt;/h3&gt;
+&lt;p&gt;I parted ways with Max in the morning as he planned to read and stay at the campsite a bit longer, after having some interesting discussions about the &lt;em&gt;Gewaltfreiekommunikation&lt;/em&gt; (violence-free communication) book he was reading, and also about cycling routes in Scotland guided by the guy who had cycled everywhere!&lt;/p&gt;
+&lt;p&gt;I was happy that this day&amp;rsquo;s route was a bit less onerous. I made a stop in the morning at the &lt;a href=&#34;https://en.wikipedia.org/wiki/Caen_Hill_Locks&#34;&gt;Caen Hill locks&lt;/a&gt; near Devizes, which are 29 locks in a row. I was happy to be going downhill, uphill looked pretty hard work there!&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/caen_hill.jpg&#34;
+    alt=&#34;Near the top of Caen Hill Locks&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Near the top of Caen Hill Locks&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The route was extremely picturesque, helped by the very sunny weather again, passing through places like Bradford upon Avon, and the Dundas aqueduct, and then I knew I was getting close to my final destination when I reached a place called Bathampton.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/dundas_top.jpg&#34;
+    alt=&#34;Dundas Aqueduct&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;At the top of Dundas Aqueduct&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/dundas_view.jpg&#34;
+    alt=&#34;Dundas Aqueduct&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;View from Dundas Aqueduct&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Eventually I reached a point where the towpath started going in and out of quite narrow tunnels and more people appeared, which was difficult to negotiate with a bike loaded with luggage. Then I realised with surprise and happiness that I must be in the centre of Bath and actually I needed to find a way off the towpath towards the centre and my final destination. A few minutes later I was grateful to reach the pretty Pulteney Bridge in Bath&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/bridge.jpg&#34;
+    alt=&#34;Pulteney Bridge at Bath&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Pulteney Bridge at Bath&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Shortly afterwards I stopped for a celebratory smoothie opposite my final destination of Bath Spa train station (again, it was a very hot day), feeling elated to have completed my tour! Unfortunately I didn&amp;rsquo;t realise I some melted chocolate from a flapjack was still on my face from earlier in the day. I decided to post the picture here anyway as a complete representation of the moment!&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/smoothie.jpg&#34;
+    alt=&#34;Smoothie opposite Bath Spa station&#34; width=&#34;400&#34;&gt;
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
     <item>
       <title>Setting up my Blog with Hugo</title>
       <link>https://pagrim.github.io/post/website_setup/</link>
