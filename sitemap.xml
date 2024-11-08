@@ -2,10 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://pagrim.github.io/post/bike-tour/</loc>
-    <lastmod>2024-08-11T18:25:09+01:00</lastmod>
+    <loc>https://pagrim.github.io/tags/algorithm/</loc>
+    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/compression/</loc>
+    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/huffman/</loc>
+    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/post/huffman-encoding/</loc>
+    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/lossless/</loc>
+    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/</loc>
+    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/</loc>
+    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/post/bike-tour/</loc>
     <lastmod>2024-08-11T18:25:09+01:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/tags/blog/</loc>
@@ -15,9 +33,6 @@
     <lastmod>2024-07-04T11:44:08+01:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/post/website_setup/</loc>
-    <lastmod>2024-07-04T11:44:08+01:00</lastmod>
-  </url><url>
-    <loc>https://pagrim.github.io/tags/</loc>
     <lastmod>2024-07-04T11:44:08+01:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/tags/web-dev/</loc>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Huffman Encoding | Peter Grimshaw&#39;s Site</title>
+    <meta name="description" content="Huffman Encoding">
+    <meta property="og:site_name" content="Huffman Encoding" />
+    <meta property="og:title" content="Peter Grimshaw&#39;s Site" />
+    <meta property="og:description" content="Recently I joined an algorithms Meetup event, which was targeted at people studying for tech interviews. The event was really useful and it was interesting to hear other people&amp;rsquo;s perspectives, but this is not the main point of this post! This event is how I came across an algorithm I hadn&amp;rsquo;t heard of before called Huffman encoding. I&amp;rsquo;ve looked at quite a few coding interview questions but never heard of this algorithm so I started investigating a few days ago&amp;hellip;" />
+    <meta property="og:image" content="https://pagrim.github.io/img/peter.jpg" />
+    <meta name="keywords"
+          content="" />
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+        integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+          crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+        integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+        crossorigin="anonymous">
+    </script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);">
+    </script>
+    
+    <meta name="keywords" content="fast, hugo, theme, minimal, gruvbox">
+    <link rel="icon" type="image/svg" href='https://pagrim.github.io/img/logo.png' />
+    <meta name="author" content='peter_grimshaw'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.126.2">
+    
+    <link rel="stylesheet" href="https://pagrim.github.io/sass/main.min.e4732d6df598be088fd42303a85eb416b51788261c37ad61e22a6c43d38facc4.css" type="text/css" media="screen">
+
+    <link rel="stylesheet" href="https://pagrim.github.io/css/style.css">
+
+    
+
+    
+    </head>
+<body>
+      <div class="line" id="scrollIndicator"></div>
+      <div class="main"><div class="title">
+  <div class="name">
+    <h2><a href="https://pagrim.github.io/"
+	   style="text-decoration: none; color: inherit;">Peter Grimshaw</a></h2>
+  </div>
+  <div class="color-scheme">
+    <input type="checkbox" class="checkbox" id="chk" />
+    <label class="label" for="chk">
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg>
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 160c-52.9 0-96 43.1-96
+										96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path></svg>
+      <div class="ball"></div>
+    </label>
+  </div>
+</div>
+<script>
+  const themeSetter = (theme) => {
+      document.body.classList.toggle('dark')
+      localStorage.setItem('theme', theme)
+      blockSwitcher()
+  }
+
+  const blockSwitcher = () => [...document.getElementsByTagName("BLOCKQUOTE")]
+	.forEach(b => b.classList.toggle('dark'))
+
+  const styleSwapper = () => {
+      document.body.classList.add('back-transition')
+      if (localStorage.getItem('theme') === 'dark') themeSetter('light')
+      else if (localStorage.getItem('theme') === 'light') themeSetter('dark')
+  }
+
+  if (localStorage.getItem('theme') === 'dark'){
+      themeSetter('dark')
+      document.addEventListener("DOMContentLoaded", blockSwitcher)
+  }
+ else localStorage.setItem('theme', 'light')
+
+  document.getElementById('chk').addEventListener('change',styleSwapper);
+
+  window.addEventListener("scroll", () => {
+      let height = document.documentElement.scrollHeight
+          - document.documentElement.clientHeight;
+      if(height >= 500){
+	  let winScroll = document.body.scrollTop
+              || document.documentElement.scrollTop;
+	  let scrolled = (winScroll / height) * 100;
+	  document.getElementById("scrollIndicator").style.width = scrolled + "%";
+      }
+  });
+</script>
+
+<section class="intro">
+  
+  <div class="post-header">
+    <a class="go-back" href="https://pagrim.github.io/"><svg aria-hidden="true" focusable="false" data-prefix="far" class="back-icon" data-icon="caret-square-left" height="25px" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M272 157.1v197.8c0 10.7-13 16.1-20.5 8.5l-98.3-98.9c-4.7-4.7-4.7-12.2 0-16.9l98.3-98.9c7.5-7.7 20.5-2.3 20.5 8.4zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg> </a>
+    <h2 class="post-title">Huffman Encoding</h2>
+</div>
+
+<p class="post-dets">Published on: November 8, 2024
+  | Reading Time: 6 min | Last Modified: November 8, 2024
+  <br>
+</p>
+<span class="tags">
+  
+  <h5><a class="tag" href='https://pagrim.github.io/tags/algorithm'>algorithm</a></h5>
+  
+  <h5><a class="tag" href='https://pagrim.github.io/tags/lossless'>lossless</a></h5>
+  
+  <h5><a class="tag" href='https://pagrim.github.io/tags/compression'>compression</a></h5>
+  
+  <h5><a class="tag" href='https://pagrim.github.io/tags/huffman'>huffman</a></h5>
+  
+</span>
+
+<div class="content">
+  <p>Recently I joined an algorithms Meetup event, which was targeted at people studying for tech interviews. The event was really useful and it was interesting to hear other people&rsquo;s perspectives, but this is not the main point of this post! This event is how I came across an algorithm I hadn&rsquo;t heard of before called Huffman encoding. I&rsquo;ve looked at quite a few coding interview questions but never heard of this algorithm so I started investigating a few days ago&hellip;</p>
+<p>TLDR; Huffman encoding is a lossless encoding algorithm, meaning you can encode and decode text without losing any information. Personally I think it&rsquo;s unlikely to come up in any kind of interview you do, although I have seen someone was unfortunate enough to be asked a Huffman question in a <a href="https://leetcode.com/discuss/interview-question/416316/google-onsite-software-engineer-huffman-coding-algorithm">Google interview</a> and it&rsquo;s probably useful knowledge.</p>
+<p>Huffman encoding is a prefix algorithm meaning that no encoded value is a prefix of another encoded value. Why is this useful? It means that you can encode your text in variable length values without any delimiters and still be certain about the meaning. For example, let&rsquo;s say we encode our text as <code>a=0, b=1, c=10</code>. Now when the value <code>10</code> is being decoded, we&rsquo;re not sure how to decode this, it could be <code>ba</code> or it could be <code>c</code>, on the other hand if we encode our text as <code>a=10, b=11, c=0</code> then we have no doubt that <code>1110</code> should be decoded as <code>ba</code>.</p>
+<p>Variations of this are used in compression algorithms and image codecs <a href="https://en.wikipedia.org/wiki/Huffman_coding#Applications">according to Wikipedia</a>.</p>
+<p>In this post I&rsquo;ll explain the idea of the Huffman algorithm by walking through an example and share my implementation. I found it helpful to explain the ideas in a blog post and I hope someone might find the explanation useful!</p>
+<h2 id="prerequisite-knowledge">Prerequisite Knowledge</h2>
+<p>It helps here if you understand a MinHeap and a Binary Tree. For this it&rsquo;s enough to know that a MinHeap is a structure which returns us the minimum value of the heap.</p>
+<h1 id="the-idea">The Idea</h1>
+<p>The idea of the algorithm is to create a Huffman tree, which is a binary tree where the leaves correspond to one character to be encoded. We encode the path from root to leaf using the convention that each left move is &lsquo;0&rsquo; and each right move &lsquo;1&rsquo;. This helps us achieve the prefix effect, because it means that no character is an ancestor of any other (because the characters are all leaves). We create other &lsquo;internal nodes&rsquo; for the non-leaf nodes. The input to the algorithm is a set of character frequencies.</p>
+<p>We use a MinHeap to store the frequencies and the characters to be encoded, and take the smallest frequencies first so that the most frequent characters are encoded nearer the top of the tree.</p>
+<h1 id="example">Example</h1>
+<p>Let&rsquo;s go through an example. First let&rsquo;s look at the input frequencies:</p>
+<pre tabindex="0"><code>character   Frequency
+    a           5
+    b           9
+    c           12
+    d           13
+    e           16
+    f           45
+</code></pre><p>Example source: <a href="https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/">GeeksforGeeks</a>.</p>
+<h2 id="initialisation">Initialisation</h2>
+<p>Remember, we are building a tree but we&rsquo;re going to do this in a way that&rsquo;s not obvious. To start with each of these characters and its frequency is in a MinHeap. They each will be a node in a tree but we haven&rsquo;t yet defined the positions in the tree. I&rsquo;m going to represent them as a Huffman Node (HN) object <code>HN(char, freq, left, right)</code> where the left and right attributes might not be present initially.</p>
+<p>We create a MinHeap with these initial characters and frequencies, so we have <code>HN(a, 5), HN(b, 9), HN(c, 12)</code> etc, so there are 7 HN&rsquo;s in our MinHeap to start with.</p>
+<h2 id="iterations-of-building-the-tree">Iterations of Building the Tree</h2>
+<p>In each iteration we pop the two smallest frequencies from the MinHeap, so in our very first iteration that&rsquo;s <code>HN(a, 5)</code> and <code>HN(b, 9)</code>. We combine the sum of the frequencies into a new object, call it <code>n1</code>. Additionally we set the smallest of our two popped nodes as the left and the largest as the right. So we create a new object <code>HN(n1, 14, left=HN(a, 5), right=HN(b, 9))</code> and push it back to the MinHeap. Maybe you can see the idea for how we are implicitly building the tree.</p>
+<p>We repeat this process, in the second iteration combining <code>HN(c, 12)</code> and <code>HN(d, 13)</code> into <code>HN(25, n2, left=HN(c, 12), right=HN(d, 13))</code>. We continue doing this, also combining any of the new &rsquo;n&rsquo; tuples.</p>
+<p>Eventually, there will only be one node left, this will be the root of our tree. So, you can see that in each iteration we are building &lsquo;mini-trees&rsquo; of three nodes and the parent node is pushed to the MinHeap so that it will later become a child node elsewhere.</p>
+<figure><img src="/post/huffman-encoding/imgs/graph.png"
+    alt="Example Tree" width="600"><figcaption>
+      <p>Example Tree</p>
+    </figcaption>
+</figure>
+
+<h2 id="encoding-characters">Encoding Characters</h2>
+<p>So we have built a Huffman tree, but how do we actually encode the nodes? We need to traverse the tree from the root to each node recursively, whilst recording each step of the path as &lsquo;0&rsquo; or &lsquo;1&rsquo; as mentioned above. For example, in the above tree we go right, left, left to reach the <code>c</code> character, so <code>c</code> will be encoded as <code>100</code>. It&rsquo;s helpful to store each of the node&rsquo;s encodings so that when we iterate through a text it&rsquo;s fast to retrieve the encoding.</p>
+<h2 id="decoding-encoded-text">Decoding Encoded Text</h2>
+<p>Now let&rsquo;s say we receive some encoded text such as <code>11001101100</code>, how do we decode this? We iterate through the text, traversing the tree until we reach a leaf. So, for example we start at the root and see <code>1</code>, so we move right and so on until we see that <code>1100</code> corresponds to &lsquo;a&rsquo;. Now we move to the next character of the encoded text and start again at the root, noticing that <code>1101</code> corresponds to &lsquo;b&rsquo; and finally <code>100</code> means &lsquo;c&rsquo;, so we have decoded the text as &lsquo;abc&rsquo;.</p>
+<h1 id="implementation">Implementation</h1>
+<p>To implement the algorithm I used two classes, <code>HuffmanEncoder</code> and <code>HuffmanNode</code>. The methods in <code>HuffmanEncoder</code> correspond to the paragraphs above, so the <code>_build_tree</code> method initialises the MinHeap and builds the tree, returning the root. The <code>_encode_tree</code> method adds the encodings to each node as an attribute. The <code>decode</code> method traverses the tree to decode an encoded string.
+<script src="https://gist.github.com/pagrim/92062363838812bad39fe2fb393c3158.js"></script>
+</p>
+<h2 id="further-info-and-conclusion">Further info and Conclusion</h2>
+<p>You can see the complete code, plus some tests and the code to generate the graph image above in <a href="https://github.com/pagrim/algorithms">this github repo</a>.</p>
+<p>That&rsquo;s all for now, I hope you got something from this exploration of the Huffman algorithm! Happy coding!</p>
+
+</div>
+
+</section>
+<footer id="footer">
+    <strong></strong>
+    <div class="social">
+        &nbsp;
+<a href="https://github.com/pagrim" target="_blank" rel="me" title="Github" referrerpolicy="no-referrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+	stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<path
+		d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+	</path>
+</svg>
+</a>
+&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/petergrimshaw/" target="_blank" rel="me" title="Linkedin" referrerpolicy="no-referrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+	stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+	<rect x="2" y="9" width="4" height="12"></rect>
+	<circle cx="4" cy="4" r="2"></circle>
+</svg>
+</a>
+&nbsp;
+    </div><strong></strong>
+    <p style="color:grey;">© 2024 Peter Grimshaw  <a href="https://creativecommons.org/licenses/by/4.0/">Some rights reserved</a>.</p>
+</footer>
+</div>
+    </body>
+</html>

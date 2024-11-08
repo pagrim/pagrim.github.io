@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on Peter Grimshaw&#39;s Site</title>
+    <link>https://pagrim.github.io/tags/algorithm/</link>
+    <description>Recent content in Algorithm on Peter Grimshaw&#39;s Site</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 08 Nov 2024 16:01:13 +0000</lastBuildDate>
+    <atom:link href="https://pagrim.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Huffman Encoding</title>
+      <link>https://pagrim.github.io/post/huffman-encoding/</link>
+      <pubDate>Fri, 08 Nov 2024 16:01:13 +0000</pubDate>
+      <guid>https://pagrim.github.io/post/huffman-encoding/</guid>
+      <description>Recently I joined an algorithms Meetup event, which was targeted at people studying for tech interviews. The event was really useful and it was interesting to hear other people&amp;rsquo;s perspectives, but this is not the main point of this post! This event is how I came across an algorithm I hadn&amp;rsquo;t heard of before called Huffman encoding. I&amp;rsquo;ve looked at quite a few coding interview questions but never heard of this algorithm so I started investigating a few days ago&amp;hellip;</description>
+    </item>
+  </channel>
+</rss>

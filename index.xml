@@ -6,7 +6,60 @@
     <description>Recent posts from on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 11 Aug 2024 18:25:09 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Nov 2024 16:01:13 +0000</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Huffman Encoding</title>
+      <link>https://pagrim.github.io/post/huffman-encoding/</link>
+      <pubDate>Fri, 08 Nov 2024 16:01:13 +0000</pubDate>
+      
+      <guid>https://pagrim.github.io/post/huffman-encoding/</guid>
+      <description>&lt;p&gt;Recently I joined an algorithms Meetup event, which was targeted at people studying for tech interviews. The event was really useful and it was interesting to hear other people&amp;rsquo;s perspectives, but this is not the main point of this post! This event is how I came across an algorithm I hadn&amp;rsquo;t heard of before called Huffman encoding. I&amp;rsquo;ve looked at quite a few coding interview questions but never heard of this algorithm so I started investigating a few days ago&amp;hellip;&lt;/p&gt;
+&lt;p&gt;TLDR; Huffman encoding is a lossless encoding algorithm, meaning you can encode and decode text without losing any information. Personally I think it&amp;rsquo;s unlikely to come up in any kind of interview you do, although I have seen someone was unfortunate enough to be asked a Huffman question in a &lt;a href=&#34;https://leetcode.com/discuss/interview-question/416316/google-onsite-software-engineer-huffman-coding-algorithm&#34;&gt;Google interview&lt;/a&gt; and it&amp;rsquo;s probably useful knowledge.&lt;/p&gt;
+&lt;p&gt;Huffman encoding is a prefix algorithm meaning that no encoded value is a prefix of another encoded value. Why is this useful? It means that you can encode your text in variable length values without any delimiters and still be certain about the meaning. For example, let&amp;rsquo;s say we encode our text as &lt;code&gt;a=0, b=1, c=10&lt;/code&gt;. Now when the value &lt;code&gt;10&lt;/code&gt; is being decoded, we&amp;rsquo;re not sure how to decode this, it could be &lt;code&gt;ba&lt;/code&gt; or it could be &lt;code&gt;c&lt;/code&gt;, on the other hand if we encode our text as &lt;code&gt;a=10, b=11, c=0&lt;/code&gt; then we have no doubt that &lt;code&gt;1110&lt;/code&gt; should be decoded as &lt;code&gt;ba&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Variations of this are used in compression algorithms and image codecs &lt;a href=&#34;https://en.wikipedia.org/wiki/Huffman_coding#Applications&#34;&gt;according to Wikipedia&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this post I&amp;rsquo;ll explain the idea of the Huffman algorithm by walking through an example and share my implementation. I found it helpful to explain the ideas in a blog post and I hope someone might find the explanation useful!&lt;/p&gt;
+&lt;h2 id=&#34;prerequisite-knowledge&#34;&gt;Prerequisite Knowledge&lt;/h2&gt;
+&lt;p&gt;It helps here if you understand a MinHeap and a Binary Tree. For this it&amp;rsquo;s enough to know that a MinHeap is a structure which returns us the minimum value of the heap.&lt;/p&gt;
+&lt;h1 id=&#34;the-idea&#34;&gt;The Idea&lt;/h1&gt;
+&lt;p&gt;The idea of the algorithm is to create a Huffman tree, which is a binary tree where the leaves correspond to one character to be encoded. We encode the path from root to leaf using the convention that each left move is &amp;lsquo;0&amp;rsquo; and each right move &amp;lsquo;1&amp;rsquo;. This helps us achieve the prefix effect, because it means that no character is an ancestor of any other (because the characters are all leaves). We create other &amp;lsquo;internal nodes&amp;rsquo; for the non-leaf nodes. The input to the algorithm is a set of character frequencies.&lt;/p&gt;
+&lt;p&gt;We use a MinHeap to store the frequencies and the characters to be encoded, and take the smallest frequencies first so that the most frequent characters are encoded nearer the top of the tree.&lt;/p&gt;
+&lt;h1 id=&#34;example&#34;&gt;Example&lt;/h1&gt;
+&lt;p&gt;Let&amp;rsquo;s go through an example. First let&amp;rsquo;s look at the input frequencies:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;character   Frequency
+    a           5
+    b           9
+    c           12
+    d           13
+    e           16
+    f           45
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Example source: &lt;a href=&#34;https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/&#34;&gt;GeeksforGeeks&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;initialisation&#34;&gt;Initialisation&lt;/h2&gt;
+&lt;p&gt;Remember, we are building a tree but we&amp;rsquo;re going to do this in a way that&amp;rsquo;s not obvious. To start with each of these characters and its frequency is in a MinHeap. They each will be a node in a tree but we haven&amp;rsquo;t yet defined the positions in the tree. I&amp;rsquo;m going to represent them as a Huffman Node (HN) object &lt;code&gt;HN(char, freq, left, right)&lt;/code&gt; where the left and right attributes might not be present initially.&lt;/p&gt;
+&lt;p&gt;We create a MinHeap with these initial characters and frequencies, so we have &lt;code&gt;HN(a, 5), HN(b, 9), HN(c, 12)&lt;/code&gt; etc, so there are 7 HN&amp;rsquo;s in our MinHeap to start with.&lt;/p&gt;
+&lt;h2 id=&#34;iterations-of-building-the-tree&#34;&gt;Iterations of Building the Tree&lt;/h2&gt;
+&lt;p&gt;In each iteration we pop the two smallest frequencies from the MinHeap, so in our very first iteration that&amp;rsquo;s &lt;code&gt;HN(a, 5)&lt;/code&gt; and &lt;code&gt;HN(b, 9)&lt;/code&gt;. We combine the sum of the frequencies into a new object, call it &lt;code&gt;n1&lt;/code&gt;. Additionally we set the smallest of our two popped nodes as the left and the largest as the right. So we create a new object &lt;code&gt;HN(n1, 14, left=HN(a, 5), right=HN(b, 9))&lt;/code&gt; and push it back to the MinHeap. Maybe you can see the idea for how we are implicitly building the tree.&lt;/p&gt;
+&lt;p&gt;We repeat this process, in the second iteration combining &lt;code&gt;HN(c, 12)&lt;/code&gt; and &lt;code&gt;HN(d, 13)&lt;/code&gt; into &lt;code&gt;HN(25, n2, left=HN(c, 12), right=HN(d, 13))&lt;/code&gt;. We continue doing this, also combining any of the new &amp;rsquo;n&amp;rsquo; tuples.&lt;/p&gt;
+&lt;p&gt;Eventually, there will only be one node left, this will be the root of our tree. So, you can see that in each iteration we are building &amp;lsquo;mini-trees&amp;rsquo; of three nodes and the parent node is pushed to the MinHeap so that it will later become a child node elsewhere.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/huffman-encoding/imgs/graph.png&#34;
+    alt=&#34;Example Tree&#34; width=&#34;600&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Example Tree&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;encoding-characters&#34;&gt;Encoding Characters&lt;/h2&gt;
+&lt;p&gt;So we have built a Huffman tree, but how do we actually encode the nodes? We need to traverse the tree from the root to each node recursively, whilst recording each step of the path as &amp;lsquo;0&amp;rsquo; or &amp;lsquo;1&amp;rsquo; as mentioned above. For example, in the above tree we go right, left, left to reach the &lt;code&gt;c&lt;/code&gt; character, so &lt;code&gt;c&lt;/code&gt; will be encoded as &lt;code&gt;100&lt;/code&gt;. It&amp;rsquo;s helpful to store each of the node&amp;rsquo;s encodings so that when we iterate through a text it&amp;rsquo;s fast to retrieve the encoding.&lt;/p&gt;
+&lt;h2 id=&#34;decoding-encoded-text&#34;&gt;Decoding Encoded Text&lt;/h2&gt;
+&lt;p&gt;Now let&amp;rsquo;s say we receive some encoded text such as &lt;code&gt;11001101100&lt;/code&gt;, how do we decode this? We iterate through the text, traversing the tree until we reach a leaf. So, for example we start at the root and see &lt;code&gt;1&lt;/code&gt;, so we move right and so on until we see that &lt;code&gt;1100&lt;/code&gt; corresponds to &amp;lsquo;a&amp;rsquo;. Now we move to the next character of the encoded text and start again at the root, noticing that &lt;code&gt;1101&lt;/code&gt; corresponds to &amp;lsquo;b&amp;rsquo; and finally &lt;code&gt;100&lt;/code&gt; means &amp;lsquo;c&amp;rsquo;, so we have decoded the text as &amp;lsquo;abc&amp;rsquo;.&lt;/p&gt;
+&lt;h1 id=&#34;implementation&#34;&gt;Implementation&lt;/h1&gt;
+&lt;p&gt;To implement the algorithm I used two classes, &lt;code&gt;HuffmanEncoder&lt;/code&gt; and &lt;code&gt;HuffmanNode&lt;/code&gt;. The methods in &lt;code&gt;HuffmanEncoder&lt;/code&gt; correspond to the paragraphs above, so the &lt;code&gt;_build_tree&lt;/code&gt; method initialises the MinHeap and builds the tree, returning the root. The &lt;code&gt;_encode_tree&lt;/code&gt; method adds the encodings to each node as an attribute. The &lt;code&gt;decode&lt;/code&gt; method traverses the tree to decode an encoded string.
+&lt;script src=&#34;https://gist.github.com/pagrim/92062363838812bad39fe2fb393c3158.js&#34;&gt;&lt;/script&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;further-info-and-conclusion&#34;&gt;Further info and Conclusion&lt;/h2&gt;
+&lt;p&gt;You can see the complete code, plus some tests and the code to generate the graph image above in &lt;a href=&#34;https://github.com/pagrim/algorithms&#34;&gt;this github repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s all for now, I hope you got something from this exploration of the Huffman algorithm! Happy coding!&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>One Person, Two Wheels and a Tent</title>
       <link>https://pagrim.github.io/post/bike-tour/</link>
