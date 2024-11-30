@@ -6,7 +6,53 @@
     <description>Recent posts from on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 08 Nov 2024 16:01:13 +0000</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Nov 2024 12:22:29 +0000</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualising Tensorflow Graphs</title>
+      <link>https://pagrim.github.io/post/tensorflow-graphs/</link>
+      <pubDate>Sat, 30 Nov 2024 12:22:29 +0000</pubDate>
+      
+      <guid>https://pagrim.github.io/post/tensorflow-graphs/</guid>
+      <description>&lt;p&gt;Recently I was looking at a Triton Server tutorial which used the &lt;code&gt;tf2onnx&lt;/code&gt; utility for converting a tensorflow model to onnx format. Triton is a tool which serves ML models, such as those from the tensorflow framework. Triton has a tensorflow backend, but it doesn&amp;rsquo;t support models from tenorflow v1 like the EAST text detection model used in the tutorial, so it&amp;rsquo;s necessary to convert the model to onnx format to serve it with Triton.&lt;/p&gt;
+&lt;p&gt;This got me wondering how does this work converting a model from one format to another, and especially, what are these inputs and outputs that you need to specify for the conversion utility? Links to the tutorial and the original paper are at the bottom of the page if you&amp;rsquo;re interested in exploring more.&lt;/p&gt;
+&lt;h2 id=&#34;tf2onnx-example&#34;&gt;tf2onnx Example&lt;/h2&gt;
+&lt;p&gt;This is the command used in the tutorial to convert the tensorflow model to onnx.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;python -m tf2onnx.convert --input frozen_east_text_detection.pb --inputs &amp;#34;input_images:0&amp;#34; --outputs &amp;#34;feature_fusion/Conv_7/Sigmoid:0&amp;#34;,&amp;#34;feature_fusion/concat_3:0&amp;#34; --output detection.onnx
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Firstly, let&amp;rsquo;s clear up what&amp;rsquo;s otherwise going on in the above command. The &lt;code&gt;tf2onnx.convert&lt;/code&gt; utility is being called, and the tenorflow model being converted is the pre-trained model stored in the &lt;code&gt;frozen_east_text_detection.pb&lt;/code&gt; file. That&amp;rsquo;s a protobuf file which stores the model graph and weights. The onnx format model is going to be stored at the &lt;code&gt;detection.onnx&lt;/code&gt; file location.&lt;/p&gt;
+&lt;p&gt;I looked into the code and realised that these are nodes in the tensorflow model graph, so, for example &lt;code&gt;input_images:0&lt;/code&gt; relates to the first (0 index) node in the graph labelled as &lt;code&gt;input_images&lt;/code&gt;. Selecting inputs and outputs allows us to choose which parts of the model graph we would like to be converted to an onnx format.&lt;/p&gt;
+&lt;p&gt;How can we see the model graph such that we could make such a choice? Tensorflow include a helpful model summary method which can be visualised in Tensorboard. Let&amp;rsquo;s download the tensorflow model &lt;a href=&#34;https://www.dropbox.com/s/r2ingd0l3zt8hxs/frozen_east_text_detection.tar.gz&#34;&gt;from dropbox here&lt;/a&gt; and unpack it.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;tar -xvf frozen_east_text_detection.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;visualising-the-tf-model&#34;&gt;Visualising the TF Model&lt;/h2&gt;
+&lt;p&gt;We can use this python code to use the &lt;code&gt;tf.summary.graph&lt;/code&gt; method which writes a summary of the graph using a &lt;code&gt;tf.summary.writer&lt;/code&gt;, which in this case writes to the &lt;code&gt;./logs&lt;/code&gt; directory. You&amp;rsquo;ll need a python runtime with tensorflow installed for this to work.&lt;/p&gt;
+&lt;script src=&#34;https://gist.github.com/pagrim/b750b4520222ddee35db47978b930c20.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create the logs directory, run the code and then visualise with tensorboard.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir logs
+python write_tf_graph.py frozen_east_text_detection.pb
+tensorboard --logdir logs
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This should start tensorboard as a local webserver running on &lt;code&gt;http://localhost:6006/&lt;/code&gt;. If you navigate to that address in your web browser you should be able to see the frozen east text detection model visualised as a graph in tensorboard.&lt;/p&gt;
+&lt;p&gt;In the tensorboard UI, it&amp;rsquo;s easy to navigate the graph and search for the nodes, for example you can search for the node named &lt;code&gt;feature_fusion/Conv_7/Sigmoid&lt;/code&gt; and tensorboard will highlight this for you.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/tensorflow-graphs/imgs/tb_search.png&#34;
+    alt=&#34;Search TF Graph&#34; width=&#34;300&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Search TF Graph in Tensorboard&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;You can quickly see that the model is composed of a feature extraction component (in this case resnet50) and a feature fusion component. From looking at the original paper and the tensorflow graph we can see that this node is in the output layer and produces the scores. It&amp;rsquo;s more difficult to see what the &lt;code&gt;feature_fusion/concat_3&lt;/code&gt; node is doing, but it seems to produce the geometry outputs according the triton tutorial and we can see from the graph that this is an output node.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/tensorflow-graphs/imgs/east_output_score_component.png&#34;
+    alt=&#34;Output Component&#34; width=&#34;600&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Output component&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Here&amp;rsquo;s the &lt;a href=&#34;https://github.com/triton-inference-server/tutorials/tree/main/Conceptual_Guide/Part_1-model_deployment&#34;&gt;triton tutorial&lt;/a&gt; that sparked my interest&lt;/li&gt;
+&lt;li&gt;If you&amp;rsquo;re interested in a deep dive into the text detection model, here&amp;rsquo;s the &lt;a href=&#34;https://arxiv.org/pdf/1704.03155&#34;&gt;EAST text detection original paper&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>Huffman Encoding</title>
       <link>https://pagrim.github.io/post/huffman-encoding/</link>

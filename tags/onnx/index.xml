@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Onnx on Peter Grimshaw&#39;s Site</title>
+    <link>https://pagrim.github.io/tags/onnx/</link>
+    <description>Recent content in Onnx on Peter Grimshaw&#39;s Site</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 30 Nov 2024 12:22:29 +0000</lastBuildDate>
+    <atom:link href="https://pagrim.github.io/tags/onnx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualising Tensorflow Graphs</title>
+      <link>https://pagrim.github.io/post/tensorflow-graphs/</link>
+      <pubDate>Sat, 30 Nov 2024 12:22:29 +0000</pubDate>
+      <guid>https://pagrim.github.io/post/tensorflow-graphs/</guid>
+      <description>Recently I was looking at a Triton Server tutorial which used the tf2onnx utility for converting a tensorflow model to onnx format. Triton is a tool which serves ML models, such as those from the tensorflow framework. Triton has a tensorflow backend, but it doesn&amp;rsquo;t support models from tenorflow v1 like the EAST text detection model used in the tutorial, so it&amp;rsquo;s necessary to convert the model to onnx format to serve it with Triton.</description>
+    </item>
+  </channel>
+</rss>

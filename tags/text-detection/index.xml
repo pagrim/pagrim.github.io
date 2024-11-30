@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Text Detection on Peter Grimshaw&#39;s Site</title>
+    <link>http://localhost:1313/tags/text-detection/</link>
+    <description>Recent content in Text Detection on Peter Grimshaw&#39;s Site</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 30 Nov 2024 12:22:29 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/text-detection/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tensorflow Graphs</title>
+      <link>http://localhost:1313/post/tensorflow-graphs/</link>
+      <pubDate>Sat, 30 Nov 2024 12:22:29 +0000</pubDate>
+      <guid>http://localhost:1313/post/tensorflow-graphs/</guid>
+      <description>Recently I was looking at this Part 1 tutorial for getting started with Triton Inference server. Part of the tutorial uses the tf2onnx utility from onnxruntime for converting a tensorflow model to onnx format&#xA;python -m tf2onnx.convert --input frozen_east_text_detection.pb --inputs &amp;#34;input_images:0&amp;#34; --outputs &amp;#34;feature_fusion/Conv_7/Sigmoid:0&amp;#34;,&amp;#34;feature_fusion/concat_3:0&amp;#34; --output detection.onnx This got me wondering, what are these inputs and outputs, and how can I find out more about them? Firstly, let&amp;rsquo;s clear up what&amp;rsquo;s otherwise going on in the above command.</description>
+    </item>
+  </channel>
+</rss>

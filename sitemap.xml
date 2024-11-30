@@ -2,6 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://pagrim.github.io/tags/model-graph/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/onnx/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/tensorboard/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/tensorflow/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/triton/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/post/tensorflow-graphs/</loc>
+    <lastmod>2024-11-30T12:22:29+00:00</lastmod>
+  </url><url>
     <loc>https://pagrim.github.io/tags/algorithm/</loc>
     <lastmod>2024-11-08T16:01:13+00:00</lastmod>
   </url><url>
@@ -15,12 +39,6 @@
     <lastmod>2024-11-08T16:01:13+00:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/tags/lossless/</loc>
-    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
-  </url><url>
-    <loc>https://pagrim.github.io/</loc>
-    <lastmod>2024-11-08T16:01:13+00:00</lastmod>
-  </url><url>
-    <loc>https://pagrim.github.io/tags/</loc>
     <lastmod>2024-11-08T16:01:13+00:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/tags/bike-tour/</loc>
