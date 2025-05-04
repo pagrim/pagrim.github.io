@@ -2,10 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://pagrim.github.io/tags/mock/</loc>
+    <lastmod>2025-04-20T15:47:24+01:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/patching/</loc>
+    <lastmod>2025-04-20T15:47:24+01:00</lastmod>
+  </url><url>
     <loc>https://pagrim.github.io/post/patching-gotchas/</loc>
     <lastmod>2025-04-20T15:47:24+01:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/</loc>
+    <lastmod>2025-04-20T15:47:24+01:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/software-development/</loc>
+    <lastmod>2025-04-20T15:47:24+01:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/</loc>
+    <lastmod>2025-04-20T15:47:24+01:00</lastmod>
+  </url><url>
+    <loc>https://pagrim.github.io/tags/testing/</loc>
     <lastmod>2025-04-20T15:47:24+01:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/tags/expectation/</loc>
@@ -15,9 +30,6 @@
     <lastmod>2024-12-30T14:18:42+00:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/tags/self-development/</loc>
-    <lastmod>2024-12-30T14:18:42+00:00</lastmod>
-  </url><url>
-    <loc>https://pagrim.github.io/tags/</loc>
     <lastmod>2024-12-30T14:18:42+00:00</lastmod>
   </url><url>
     <loc>https://pagrim.github.io/post/expectation-effect/</loc>

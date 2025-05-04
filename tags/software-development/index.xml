@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software Development on Peter Grimshaw&#39;s Site</title>
+    <link>https://pagrim.github.io/tags/software-development/</link>
+    <description>Recent content in Software Development on Peter Grimshaw&#39;s Site</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 20 Apr 2025 15:47:24 +0100</lastBuildDate>
+    <atom:link href="https://pagrim.github.io/tags/software-development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Patching - nothing to do with Pirates, but also Scary</title>
+      <link>https://pagrim.github.io/post/patching-gotchas/</link>
+      <pubDate>Sun, 20 Apr 2025 15:47:24 +0100</pubDate>
+      <guid>https://pagrim.github.io/post/patching-gotchas/</guid>
+      <description>I always find patching one of the most difficult aspects of writing good code tests, so I wanted to share some tips and tricks on patching and some particular &amp;lsquo;gotchas&amp;rsquo; that can be confusing to deal with.&#xA;What is patching? Why would I want to do this? When we write tests, we might call function a which calls some other function b, and we don&amp;rsquo;t necessarily want to test the correctness of function b or call function b at all.</description>
+    </item>
+  </channel>
+</rss>
