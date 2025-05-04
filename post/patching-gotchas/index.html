@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Patching - nothing to do with Pirates, but also Scary | Peter Grimshaw&#39;s Site</title>
+    <meta name="description" content="Patching - nothing to do with Pirates, but also Scary">
+    <meta property="og:site_name" content="Patching - nothing to do with Pirates, but also Scary" />
+    <meta property="og:title" content="Peter Grimshaw&#39;s Site" />
+    <meta property="og:description" content="I always find patching one of the most difficult aspects of writing good code tests, so I wanted to share some tips and tricks on patching and some particular &amp;lsquo;gotchas&amp;rsquo; that can be confusing to deal with.
+What is patching? Why would I want to do this? When we write tests, we might call function a which calls some other function b, and we don&amp;rsquo;t necessarily want to test the correctness of function b or call function b at all." />
+    <meta property="og:image" content="https://pagrim.github.io/img/peter.jpg" />
+    <meta name="keywords"
+          content="" />
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+        integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+          crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+        integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+        crossorigin="anonymous">
+    </script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);">
+    </script>
+    
+    <meta name="keywords" content="fast, hugo, theme, minimal, gruvbox">
+    <link rel="icon" type="image/svg" href='https://pagrim.github.io/img/logo.png' />
+    <meta name="author" content='peter_grimshaw'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.126.2">
+    
+    <link rel="stylesheet" href="https://pagrim.github.io/sass/main.min.6d1dbc00bf6446a1d87f69d53b9d5a9b4911c47b714ee42a3822de3f13d959f3.css" type="text/css" media="screen">
+
+    <link rel="stylesheet" href="https://pagrim.github.io/css/style.css">
+
+    
+
+    
+    </head>
+<body>
+      <div class="line" id="scrollIndicator"></div>
+      <div class="main"><div class="title">
+  <div class="name">
+    <h2><a href="https://pagrim.github.io/"
+	   style="text-decoration: none; color: inherit;">Peter Grimshaw</a></h2>
+  </div>
+  <div class="color-scheme">
+    <input type="checkbox" class="checkbox" id="chk" />
+    <label class="label" for="chk">
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg>
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 160c-52.9 0-96 43.1-96
+										96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path></svg>
+      <div class="ball"></div>
+    </label>
+  </div>
+</div>
+<script>
+  const themeSetter = (theme) => {
+      document.body.classList.toggle('dark')
+      localStorage.setItem('theme', theme)
+      blockSwitcher()
+  }
+
+  const blockSwitcher = () => [...document.getElementsByTagName("BLOCKQUOTE")]
+	.forEach(b => b.classList.toggle('dark'))
+
+  const styleSwapper = () => {
+      document.body.classList.add('back-transition')
+      if (localStorage.getItem('theme') === 'dark') themeSetter('light')
+      else if (localStorage.getItem('theme') === 'light') themeSetter('dark')
+  }
+
+  if (localStorage.getItem('theme') === 'dark'){
+      themeSetter('dark')
+      document.addEventListener("DOMContentLoaded", blockSwitcher)
+  }
+ else localStorage.setItem('theme', 'light')
+
+  document.getElementById('chk').addEventListener('change',styleSwapper);
+
+  window.addEventListener("scroll", () => {
+      let height = document.documentElement.scrollHeight
+          - document.documentElement.clientHeight;
+      if(height >= 500){
+	  let winScroll = document.body.scrollTop
+              || document.documentElement.scrollTop;
+	  let scrolled = (winScroll / height) * 100;
+	  document.getElementById("scrollIndicator").style.width = scrolled + "%";
+      }
+  });
+</script>
+
+<section class="intro">
+  
+  <div class="post-header">
+    <a class="go-back" href="https://pagrim.github.io/"><svg aria-hidden="true" focusable="false" data-prefix="far" class="back-icon" data-icon="caret-square-left" height="25px" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M272 157.1v197.8c0 10.7-13 16.1-20.5 8.5l-98.3-98.9c-4.7-4.7-4.7-12.2 0-16.9l98.3-98.9c7.5-7.7 20.5-2.3 20.5 8.4zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg> </a>
+    <h2 class="post-title">Patching - nothing to do with Pirates, but also Scary</h2>
+</div>
+
+<p class="post-dets">Published on: April 20, 2025
+  | Reading Time: 6 min | Last Modified: April 20, 2025
+  <br>
+</p>
+<span class="tags">
+  
+</span>
+
+<div class="content">
+  <p>I always find patching one of the most difficult aspects of writing good code tests, so I wanted to share some tips and tricks on patching and some particular &lsquo;gotchas&rsquo; that can be confusing to deal with.</p>
+<h1 id="what-is-patching-why-would-i-want-to-do-this">What is patching? Why would I want to do this?</h1>
+<p>When we write tests, we might call <em>function a</em> which calls some other <em>function b</em>, and we don&rsquo;t necessarily want to test the correctness of <em>function b</em> or call <em>function b</em> at all. So we change the behaviour of the code such that when <em>function a</em> is executed it doesn&rsquo;t call <em>function b</em>, it returns a mock object. Furthermore, we might specify what the mock object returns to help our testing. In some circumstances we might be able to achieve this using a mock object, but sometimes this is not possible and we need to somehow be able to change the behaviour of code without being able to pass mock objects into the tested function, and this is what we call patching.</p>
+<p>I&rsquo;ll give some examples below, with code and tests written in python, using the pytest framework to execute tests and with patchers and mocks from the python standard library package unittest. Although these are written for pytest and unittest, the examples can be applied to testing frameworks written in other languages. All the code examples used are <a href="https://github.com/pagrim/testing-examples">available on github</a>.</p>
+<h1 id="mock-example">Mock Example</h1>
+<p>Let&rsquo;s say we want to test the <code>write_temperature</code> function.</p>
+<pre tabindex="0"><code>def write_temperature(service: WeatherService, city):
+    temp = service.get_temperature(city)
+    return f&#34;The temperature in {city} is {temp}°C&#34;
+</code></pre><p>We can see the function that uses a weather service object passed as an argument and calls the <code>get_temperature</code> method of this object. So, how can we test this? We can create a mock object to represent the service so that we don&rsquo;t call the method from the real object.</p>
+<pre tabindex="0"><code>def test_write_temperature_mock():
+    mock_ws = Mock()
+    mock_ws.get_temperature.return_value = 16.1
+    assert write_temperature(mock_ws, &#34;Example city&#34;) == f&#34;The temperature in Example city is 16.1°C&#34;
+</code></pre><p>We are using a mock object called <code>mock_ws</code> and setting the return value of its <code>get_temperature</code> method, then making an assertion about the expected return value.</p>
+<h1 id="patching-example">Patching Example</h1>
+<p>Now let&rsquo;s say we want to test the get_temperature method. We don&rsquo;t want to call the real <code>_fetch_weather</code> method, but we have no obvious way to pass a mock object, so this is a good case for patching.</p>
+<pre tabindex="0"><code>def get_temperature(self, city):
+    raw_data = self._fetch_weather(city)
+    return raw_data[&#39;temperature&#39;]
+</code></pre><p>When we run the test, we need to handle the _fetch_weather method, because we don&rsquo;t want to run the real method which might invoke external API calls and make our test complex. So we could write a test like below.</p>
+<pre tabindex="0"><code>@patch(&#34;weather.example.WeatherService._fetch_weather&#34;)
+def test_get_temperature(mock_fetch):
+    ws = WeatherService()
+    mock_fetch.return_value = {&#39;temperature&#39;: 16.1}
+    assert ws.get_temperature(ws) == 16.1
+</code></pre><p>So, what&rsquo;s going on here? We are using the <code>@patch</code> decorator to change the behaviour of the patched function at test run time; We are telling the test to return the dictionary <code>{'temperature': 16.1}</code> instead of running the real function.</p>
+<p>For patching with Python, the built-in unit test library provides a helpful set of patchers. Personally I prefer to use them as decorators since this keeps the code looking a bit tidier, but you can also use them as context managers (i.e. using a <code>with</code> statement).</p>
+<h1 id="gotchas">Gotchas</h1>
+<p>As mentioned at the start of this post, I think patching can be tricky to implement correctly. You&rsquo;re changing the behaviour of code at runtime, and sometimes that&rsquo;s difficult to reason with. Here are some examples of patching that are more difficult to make sense of.</p>
+<h2 id="1-patching-at-the-wrong-time">1. Patching at the Wrong Time</h2>
+<p>Let&rsquo;s say we want to patch the <code>choose_base_url</code> method of our WeatherService, to test that the <code>base_url</code> attribute is really being set correctly in the constructor. In this example the constructor is simple, but you can imagine that there might be a more complex examples where a test for this would be very helpful.</p>
+<pre tabindex="0"><code>class WeatherService:
+    def __init__(self, base_url=None):
+        self.default_url = &#34;https://example.weather.api&#34;
+        self.base_url = self.choose_base_url(base_url)
+
+    def choose_base_url(self, base_url):
+        if base_url is None:
+            return self.default_url
+        return base_url
+</code></pre><p>Let&rsquo;s say we write a test like this.</p>
+<pre tabindex="0"><code>def test_choose_base_url():
+    service = WeatherService()
+    with patch.object(WeatherService, &#39;choose_base_url&#39;, return_value=&#34;test-url&#34;):
+        assert service.base_url == &#34;test-url&#34;
+</code></pre><p>Let&rsquo;s talk through what is happening here. We are creating a <code>WeatherService</code> object called <code>service</code>. Then we are patching the <code>WeatherService</code> class and telling the code to return the value <code>test-url</code> at runtime. So it seems like what should happen at runtime is that the mock object is used instead of the real object and our assertion should pass since it checks that the <code>base_url</code> of the mock object is set to the value we specified.</p>
+<p>If you try running this test, it will fail, and it might not be obvious why. The source of the issue is that the  <code>WeatherService</code> object is instantiated before it is patched, so the <code>patch.object</code> statement actually has no effect. The mock object has its attribute changed, but When we run the final assertion, the <code>service</code> object to being referred to is the <em>real one, not the mock one</em>. If we move the line <code>service = WeatherService()</code> after the patch, we get the intended behaviour and the test will pass.</p>
+<p>Another version of this timing issue is changing the mock object after the tested function has been called, <a href="https://github.com/pagrim/testing-examples/blob/main/test/weather/test_example.py#L25">like this example</a>.</p>
+<h2 id="2-patching-the-class-not-an-instance">2. Patching the class, not an Instance</h2>
+<p>Let&rsquo;s say we want to test this method.</p>
+<pre tabindex="0"><code>def write_paris_temperature():
+    ws = WeatherService()
+    return write_temperature(ws, &#39;Paris&#39;)
+</code></pre><p>We write a test like this</p>
+<pre tabindex="0"><code>@patch(&#34;weather.example.WeatherService&#34;, autospec=True)
+def test_patch_class_but_real_instance_used(mock_service):
+    mock_service.get_temperature.return_value = 18
+    assert write_paris_temperature() == &#34;The temperature in Paris is 18°C&#34;
+</code></pre><p>When we run the test, it fails, showing that the actual value returned is a MagicMock. This is confusing because it seems like we have patched the class and set the return value of its <code>get_temperature</code> method. So, what&rsquo;s going on here? We are patching the weather service class with a mock object called <code>mock_service</code>, so when the class constructor is called, that mock returns another mock, and it&rsquo;s the <code>get_temperature</code> method of this other mock that is called.</p>
+<p>The example below which shows a direct fix for this issue.</p>
+<pre tabindex="0"><code>@patch(&#34;weather.example.WeatherService&#34;, autospec=True)
+def test_patch_class_mock(mock_service):
+    mock_ws = Mock()
+    mock_ws.get_temperature.return_value = 18
+    mock_service.return_value = mock_ws
+    assert write_paris_temperature() == &#34;The temperature in Paris is 18°C&#34;
+</code></pre><p>Now, the weather Service class is still mocked by the <code>mock_service</code> object, but We have created a new mock which will be returned by the class constructor and so the test passes. You might think this seems a bit complicated. I always find when something seems a bit complicated it&rsquo;s worth considering if it&rsquo;s sensible. In this case, there is an easier way to deal with this if we have access to the <code>WeatherService</code> class; we can do the same thing more easily with <code>patch.object</code> instead.</p>
+<pre tabindex="0"><code>@patch.object(WeatherService, &#39;get_temperature&#39;, autospec=True, return_value=18)
+def test_patch_class_mock_object():
+    assert write_paris_temperature() == &#34;The temperature in Paris is 18°C&#34;
+</code></pre><h1 id="summary">Summary</h1>
+<p>So, in this post, we have looked at how to replace real code with a mock object in a test. We saw that in some circumstances this is not possible and we need to use patching instead. We saw that this can be tricky to implement correctly and looked at two common issues, firstly, patching at the wrong time, and secondly, patching the class instead of an instance of the class.</p>
+<p>That&rsquo;s all for now. Happy testing!</p>
+
+</div>
+
+</section>
+<footer id="footer">
+    <strong></strong>
+    <div class="social">
+        &nbsp;
+<a href="https://github.com/pagrim" target="_blank" rel="me" title="Github" referrerpolicy="no-referrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+	stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<path
+		d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+	</path>
+</svg>
+</a>
+&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/petergrimshaw/" target="_blank" rel="me" title="Linkedin" referrerpolicy="no-referrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+	stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+	<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+	<rect x="2" y="9" width="4" height="12"></rect>
+	<circle cx="4" cy="4" r="2"></circle>
+</svg>
+</a>
+&nbsp;
+    </div><strong></strong>
+    <p style="color:grey;">© 2024 Peter Grimshaw  <a href="https://creativecommons.org/licenses/by/4.0/">Some rights reserved</a>.</p>
+</footer>
+</div>
+    </body>
+</html>

@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo</generator>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 30 Dec 2024 14:18:42 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Apr 2025 15:47:24 +0100</lastBuildDate>
     <atom:link href="https://pagrim.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Patching - nothing to do with Pirates, but also Scary</title>
+      <link>https://pagrim.github.io/post/patching-gotchas/</link>
+      <pubDate>Sun, 20 Apr 2025 15:47:24 +0100</pubDate>
+      <guid>https://pagrim.github.io/post/patching-gotchas/</guid>
+      <description>I always find patching one of the most difficult aspects of writing good code tests, so I wanted to share some tips and tricks on patching and some particular &amp;lsquo;gotchas&amp;rsquo; that can be confusing to deal with.&#xA;What is patching? Why would I want to do this? When we write tests, we might call function a which calls some other function b, and we don&amp;rsquo;t necessarily want to test the correctness of function b or call function b at all.</description>
+    </item>
     <item>
       <title>The Expectation Effect</title>
       <link>https://pagrim.github.io/post/expectation-effect/</link>

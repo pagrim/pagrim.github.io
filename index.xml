@@ -6,7 +6,90 @@
     <description>Recent posts from on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 30 Dec 2024 14:18:42 +0000</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Apr 2025 15:47:24 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Patching - nothing to do with Pirates, but also Scary</title>
+      <link>https://pagrim.github.io/post/patching-gotchas/</link>
+      <pubDate>Sun, 20 Apr 2025 15:47:24 +0100</pubDate>
+      
+      <guid>https://pagrim.github.io/post/patching-gotchas/</guid>
+      <description>&lt;p&gt;I always find patching one of the most difficult aspects of writing good code tests, so I wanted to share some tips and tricks on patching and some particular &amp;lsquo;gotchas&amp;rsquo; that can be confusing to deal with.&lt;/p&gt;
+&lt;h1 id=&#34;what-is-patching-why-would-i-want-to-do-this&#34;&gt;What is patching? Why would I want to do this?&lt;/h1&gt;
+&lt;p&gt;When we write tests, we might call &lt;em&gt;function a&lt;/em&gt; which calls some other &lt;em&gt;function b&lt;/em&gt;, and we don&amp;rsquo;t necessarily want to test the correctness of &lt;em&gt;function b&lt;/em&gt; or call &lt;em&gt;function b&lt;/em&gt; at all. So we change the behaviour of the code such that when &lt;em&gt;function a&lt;/em&gt; is executed it doesn&amp;rsquo;t call &lt;em&gt;function b&lt;/em&gt;, it returns a mock object. Furthermore, we might specify what the mock object returns to help our testing. In some circumstances we might be able to achieve this using a mock object, but sometimes this is not possible and we need to somehow be able to change the behaviour of code without being able to pass mock objects into the tested function, and this is what we call patching.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll give some examples below, with code and tests written in python, using the pytest framework to execute tests and with patchers and mocks from the python standard library package unittest. Although these are written for pytest and unittest, the examples can be applied to testing frameworks written in other languages. All the code examples used are &lt;a href=&#34;https://github.com/pagrim/testing-examples&#34;&gt;available on github&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;mock-example&#34;&gt;Mock Example&lt;/h1&gt;
+&lt;p&gt;Let&amp;rsquo;s say we want to test the &lt;code&gt;write_temperature&lt;/code&gt; function.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def write_temperature(service: WeatherService, city):
+    temp = service.get_temperature(city)
+    return f&amp;#34;The temperature in {city} is {temp}°C&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can see the function that uses a weather service object passed as an argument and calls the &lt;code&gt;get_temperature&lt;/code&gt; method of this object. So, how can we test this? We can create a mock object to represent the service so that we don&amp;rsquo;t call the method from the real object.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def test_write_temperature_mock():
+    mock_ws = Mock()
+    mock_ws.get_temperature.return_value = 16.1
+    assert write_temperature(mock_ws, &amp;#34;Example city&amp;#34;) == f&amp;#34;The temperature in Example city is 16.1°C&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We are using a mock object called &lt;code&gt;mock_ws&lt;/code&gt; and setting the return value of its &lt;code&gt;get_temperature&lt;/code&gt; method, then making an assertion about the expected return value.&lt;/p&gt;
+&lt;h1 id=&#34;patching-example&#34;&gt;Patching Example&lt;/h1&gt;
+&lt;p&gt;Now let&amp;rsquo;s say we want to test the get_temperature method. We don&amp;rsquo;t want to call the real &lt;code&gt;_fetch_weather&lt;/code&gt; method, but we have no obvious way to pass a mock object, so this is a good case for patching.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def get_temperature(self, city):
+    raw_data = self._fetch_weather(city)
+    return raw_data[&amp;#39;temperature&amp;#39;]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When we run the test, we need to handle the _fetch_weather method, because we don&amp;rsquo;t want to run the real method which might invoke external API calls and make our test complex. So we could write a test like below.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@patch(&amp;#34;weather.example.WeatherService._fetch_weather&amp;#34;)
+def test_get_temperature(mock_fetch):
+    ws = WeatherService()
+    mock_fetch.return_value = {&amp;#39;temperature&amp;#39;: 16.1}
+    assert ws.get_temperature(ws) == 16.1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So, what&amp;rsquo;s going on here? We are using the &lt;code&gt;@patch&lt;/code&gt; decorator to change the behaviour of the patched function at test run time; We are telling the test to return the dictionary &lt;code&gt;{&#39;temperature&#39;: 16.1}&lt;/code&gt; instead of running the real function.&lt;/p&gt;
+&lt;p&gt;For patching with Python, the built-in unit test library provides a helpful set of patchers. Personally I prefer to use them as decorators since this keeps the code looking a bit tidier, but you can also use them as context managers (i.e. using a &lt;code&gt;with&lt;/code&gt; statement).&lt;/p&gt;
+&lt;h1 id=&#34;gotchas&#34;&gt;Gotchas&lt;/h1&gt;
+&lt;p&gt;As mentioned at the start of this post, I think patching can be tricky to implement correctly. You&amp;rsquo;re changing the behaviour of code at runtime, and sometimes that&amp;rsquo;s difficult to reason with. Here are some examples of patching that are more difficult to make sense of.&lt;/p&gt;
+&lt;h2 id=&#34;1-patching-at-the-wrong-time&#34;&gt;1. Patching at the Wrong Time&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s say we want to patch the &lt;code&gt;choose_base_url&lt;/code&gt; method of our WeatherService, to test that the &lt;code&gt;base_url&lt;/code&gt; attribute is really being set correctly in the constructor. In this example the constructor is simple, but you can imagine that there might be a more complex examples where a test for this would be very helpful.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class WeatherService:
+    def __init__(self, base_url=None):
+        self.default_url = &amp;#34;https://example.weather.api&amp;#34;
+        self.base_url = self.choose_base_url(base_url)
+
+    def choose_base_url(self, base_url):
+        if base_url is None:
+            return self.default_url
+        return base_url
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;rsquo;s say we write a test like this.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def test_choose_base_url():
+    service = WeatherService()
+    with patch.object(WeatherService, &amp;#39;choose_base_url&amp;#39;, return_value=&amp;#34;test-url&amp;#34;):
+        assert service.base_url == &amp;#34;test-url&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;rsquo;s talk through what is happening here. We are creating a &lt;code&gt;WeatherService&lt;/code&gt; object called &lt;code&gt;service&lt;/code&gt;. Then we are patching the &lt;code&gt;WeatherService&lt;/code&gt; class and telling the code to return the value &lt;code&gt;test-url&lt;/code&gt; at runtime. So it seems like what should happen at runtime is that the mock object is used instead of the real object and our assertion should pass since it checks that the &lt;code&gt;base_url&lt;/code&gt; of the mock object is set to the value we specified.&lt;/p&gt;
+&lt;p&gt;If you try running this test, it will fail, and it might not be obvious why. The source of the issue is that the  &lt;code&gt;WeatherService&lt;/code&gt; object is instantiated before it is patched, so the &lt;code&gt;patch.object&lt;/code&gt; statement actually has no effect. The mock object has its attribute changed, but When we run the final assertion, the &lt;code&gt;service&lt;/code&gt; object to being referred to is the &lt;em&gt;real one, not the mock one&lt;/em&gt;. If we move the line &lt;code&gt;service = WeatherService()&lt;/code&gt; after the patch, we get the intended behaviour and the test will pass.&lt;/p&gt;
+&lt;p&gt;Another version of this timing issue is changing the mock object after the tested function has been called, &lt;a href=&#34;https://github.com/pagrim/testing-examples/blob/main/test/weather/test_example.py#L25&#34;&gt;like this example&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;2-patching-the-class-not-an-instance&#34;&gt;2. Patching the class, not an Instance&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s say we want to test this method.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def write_paris_temperature():
+    ws = WeatherService()
+    return write_temperature(ws, &amp;#39;Paris&amp;#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We write a test like this&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@patch(&amp;#34;weather.example.WeatherService&amp;#34;, autospec=True)
+def test_patch_class_but_real_instance_used(mock_service):
+    mock_service.get_temperature.return_value = 18
+    assert write_paris_temperature() == &amp;#34;The temperature in Paris is 18°C&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When we run the test, it fails, showing that the actual value returned is a MagicMock. This is confusing because it seems like we have patched the class and set the return value of its &lt;code&gt;get_temperature&lt;/code&gt; method. So, what&amp;rsquo;s going on here? We are patching the weather service class with a mock object called &lt;code&gt;mock_service&lt;/code&gt;, so when the class constructor is called, that mock returns another mock, and it&amp;rsquo;s the &lt;code&gt;get_temperature&lt;/code&gt; method of this other mock that is called.&lt;/p&gt;
+&lt;p&gt;The example below which shows a direct fix for this issue.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@patch(&amp;#34;weather.example.WeatherService&amp;#34;, autospec=True)
+def test_patch_class_mock(mock_service):
+    mock_ws = Mock()
+    mock_ws.get_temperature.return_value = 18
+    mock_service.return_value = mock_ws
+    assert write_paris_temperature() == &amp;#34;The temperature in Paris is 18°C&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now, the weather Service class is still mocked by the &lt;code&gt;mock_service&lt;/code&gt; object, but We have created a new mock which will be returned by the class constructor and so the test passes. You might think this seems a bit complicated. I always find when something seems a bit complicated it&amp;rsquo;s worth considering if it&amp;rsquo;s sensible. In this case, there is an easier way to deal with this if we have access to the &lt;code&gt;WeatherService&lt;/code&gt; class; we can do the same thing more easily with &lt;code&gt;patch.object&lt;/code&gt; instead.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@patch.object(WeatherService, &amp;#39;get_temperature&amp;#39;, autospec=True, return_value=18)
+def test_patch_class_mock_object():
+    assert write_paris_temperature() == &amp;#34;The temperature in Paris is 18°C&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;summary&#34;&gt;Summary&lt;/h1&gt;
+&lt;p&gt;So, in this post, we have looked at how to replace real code with a mock object in a test. We saw that in some circumstances this is not possible and we need to use patching instead. We saw that this can be tricky to implement correctly and looked at two common issues, firstly, patching at the wrong time, and secondly, patching the class instead of an instance of the class.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s all for now. Happy testing!&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>The Expectation Effect</title>
       <link>https://pagrim.github.io/post/expectation-effect/</link>
