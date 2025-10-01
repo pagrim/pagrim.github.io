@@ -6,7 +6,31 @@
     <description>Recent posts from on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 20 Apr 2025 15:47:24 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Sep 2025 08:05:01 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ML Inference with BentoML</title>
+      <link>https://pagrim.github.io/post/bentoml-chronos/</link>
+      <pubDate>Mon, 29 Sep 2025 08:05:01 +0100</pubDate>
+      
+      <guid>https://pagrim.github.io/post/bentoml-chronos/</guid>
+      <description>&lt;p&gt;When it comes to deploying machine learning models into production, there’s no shortage of tools available. I’ve been exploring the landscape of ML inference frameworks, trying to understand the trade-offs and strengths of different options. I spent a bit of time investigating BentoML a while back, and really liked user-friendly design and focus on model serving.&lt;/p&gt;
+&lt;h1 id=&#34;how-widely-used-is-bentoml&#34;&gt;How Widely used is BentoML?&lt;/h1&gt;
+&lt;p&gt;For fun—and a bit of insight—I compared three well-known ML serving tools &lt;a href=&#34;https://trends.google.com/trends/explore?date=2021-01-01%202025-04-09&amp;amp;q=BentoML,triton%20server,kserve&amp;amp;hl=en-GB&#34;&gt;using Google Trends&lt;/a&gt;: BentoML, NVIDIA’s Triton Inference Server, and KServe. Unsurprisingly, Triton Server had the highest peak of search interest, hitting its maximum in November 2024. At that point, BentoML only garnered 32% of the search volume Triton received. As of September 2025, Triton is still leading at 83% of its peak, followed by KServe at 73%, while BentoML trails at 36%.&lt;/p&gt;
+&lt;p&gt;These numbers are all relative to the most searched point in time, but they give an interesting look into community interest. It’s also worth noting that all three are far behind MLflow in terms of search volume. This suggests that experiment tracking remains a bigger concern for many practitioners than model serving. I think it also helps that the ecosystem has honed in on mlflow for experiment tracking but there are many solutions around for model serving.&lt;/p&gt;
+&lt;h1 id=&#34;applying-bentoml-in-practice-time-series-forecasting-with-chronos&#34;&gt;Applying BentoML in Practice: Time Series Forecasting with Chronos&lt;/h1&gt;
+&lt;p&gt;To put BentoML to the test, I chose to work on a time series forecasting problem as it&amp;rsquo;s an area I am familiar with. For this, I used Chronos, a pre-trained model developed by Amazon that adapts the architecture of large language models (LLMs) to time series data.&lt;/p&gt;
+&lt;p&gt;The premise behind Chronos is compelling: both LLMs and time series models are fundamentally about predicting the next item in a sequence. Leveraging this similarity, the researchers at Amazon trained Chronos on 42 open-source time series datasets, and in several cases, it outperformed models trained specifically on those datasets. You can read more about the methodology and benchmarks in the paper here.&lt;/p&gt;
+&lt;p&gt;I tested Chronos with the Traffic Hourly dataset, which was one of the out-of-domain datasets used by the authors of Chronos. This means the model hadn’t seen this data during training, making it a good test of generalisation.&lt;/p&gt;
+&lt;h2 id=&#34;getting-chronos-running-with-bentoml&#34;&gt;Getting Chronos Running with BentoML&lt;/h2&gt;
+&lt;p&gt;I pulled the &lt;code&gt;chronos-t5-small&lt;/code&gt; model &lt;a href=&#34;https://huggingface.co/amazon/chronos-t5-small&#34;&gt;from Hugging Face&lt;/a&gt; and began investigating it through some hands-on experimentation (check out the notebook directory in the repo if you&amp;rsquo;re interested in the details). Deploying it with BentoML was mostly smooth, but I did run into a few hiccups.&lt;/p&gt;
+&lt;p&gt;One issue involved serialisation errors with Pydantic, which took me a while to work out. It turns out the key was to ensure that the input and output types were correctly defined. Another oddity was that the context parameter was not present in the input specification, seemingly due to naming conventions or how the schema was auto-generated.&lt;/p&gt;
+&lt;p&gt;Despite these minor setup challenges, it was straightforward to get a model containerised and running inference quickly. With just a &lt;code&gt;bentoml build&lt;/code&gt; followed by &lt;code&gt;bentoml containerize&lt;/code&gt; I had a working Docker container ready to go. You can even inspect the generated Bento bundle by running &lt;code&gt;bentoml get -o path&lt;/code&gt;, which reveals the internal structure, including the Dockerfile and other metadata. The corresponding code is &lt;a href=&#34;https://github.com/pagrim/bentoml-chronos&#34;&gt;on github here&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;final-thoughts&#34;&gt;Final Thoughts&lt;/h1&gt;
+&lt;p&gt;Exploring model inference tools through the lens of a real-world problem like time series forecasting was both fun and instructive. While BentoML isn’t the most searched-for solution today, it certainly holds its own in terms of usability and developer experience. Meanwhile, tools like Triton Server and KServe continue to attract more attention, each serving different needs and preferences.&lt;/p&gt;
+&lt;p&gt;The landscape of ML model deployment is still evolving, and it will be interesting to see if a single tool emerges as dominant, or if we continue to see a diversity of approaches. For now, BentoML offers a compelling balance of simplicity and power—especially for quickly moving from prototype to containerized model.&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>Patching - nothing to do with Pirates, but also Scary</title>
       <link>https://pagrim.github.io/post/patching-gotchas/</link>

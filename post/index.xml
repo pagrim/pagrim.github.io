@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 20 Apr 2025 15:47:24 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 29 Sep 2025 08:05:01 +0100</lastBuildDate>
     <atom:link href="https://pagrim.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ML Inference with BentoML</title>
+      <link>https://pagrim.github.io/post/bentoml-chronos/</link>
+      <pubDate>Mon, 29 Sep 2025 08:05:01 +0100</pubDate>
+      <guid>https://pagrim.github.io/post/bentoml-chronos/</guid>
+      <description>When it comes to deploying machine learning models into production, there’s no shortage of tools available. I’ve been exploring the landscape of ML inference frameworks, trying to understand the trade-offs and strengths of different options. I spent a bit of time investigating BentoML a while back, and really liked user-friendly design and focus on model serving.&#xA;How Widely used is BentoML? For fun—and a bit of insight—I compared three well-known ML serving tools using Google Trends: BentoML, NVIDIA’s Triton Inference Server, and KServe.</description>
+    </item>
     <item>
       <title>Patching - nothing to do with Pirates, but also Scary</title>
       <link>https://pagrim.github.io/post/patching-gotchas/</link>
