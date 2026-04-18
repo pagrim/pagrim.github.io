@@ -33,7 +33,7 @@
     <link rel="icon" type="image/svg" href='https://pagrim.github.io/img/logo.png' />
     <meta name="author" content='peter_grimshaw'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.126.2">
+    <meta name="generator" content="Hugo 0.123.7">
     
     <link rel="stylesheet" href="https://pagrim.github.io/sass/main.min.6d1dbc00bf6446a1d87f69d53b9d5a9b4911c47b714ee42a3822de3f13d959f3.css" type="text/css" media="screen">
 
@@ -141,17 +141,17 @@ python write_tf_graph.py frozen_east_text_detection.pb
 tensorboard --logdir logs
 </code></pre><p>This should start tensorboard as a local webserver running on <code>http://localhost:6006/</code>. If you navigate to that address in your web browser you should be able to see the frozen east text detection model visualised as a graph in tensorboard.</p>
 <p>In the tensorboard UI, it&rsquo;s easy to navigate the graph and search for the nodes, for example you can search for the node named <code>feature_fusion/Conv_7/Sigmoid</code> and tensorboard will highlight this for you.</p>
-<figure><img src="/post/tensorflow-graphs/imgs/tb_search.png"
-    alt="Search TF Graph" width="300"><figcaption>
-      <p>Search TF Graph in Tensorboard</p>
-    </figcaption>
+<figure><img src="imgs/tb_search.png"
+         alt="Search TF Graph" width="300"/><figcaption>
+            <p>Search TF Graph in Tensorboard</p>
+        </figcaption>
 </figure>
 
 <p>You can quickly see that the model is composed of a feature extraction component (in this case resnet50) and a feature fusion component. From looking at the original paper and the tensorflow graph we can see that this node is in the output layer and produces the scores. It&rsquo;s more difficult to see what the <code>feature_fusion/concat_3</code> node is doing, but it seems to produce the geometry outputs according the triton tutorial and we can see from the graph that this is an output node.</p>
-<figure><img src="/post/tensorflow-graphs/imgs/east_output_score_component.png"
-    alt="Output Component" width="600"><figcaption>
-      <p>Output component</p>
-    </figcaption>
+<figure><img src="imgs/east_output_score_component.png"
+         alt="Output Component" width="600"/><figcaption>
+            <p>Output component</p>
+        </figcaption>
 </figure>
 
 <h2 id="links">Links</h2>

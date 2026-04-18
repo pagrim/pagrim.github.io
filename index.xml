@@ -6,7 +6,33 @@
     <description>Recent posts from on Peter Grimshaw&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 29 Sep 2025 08:05:01 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Apr 2026 16:56:02 +0100</lastBuildDate><atom:link href="https://pagrim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fzf - The Fuzzy Finder</title>
+      <link>https://pagrim.github.io/post/fzf/</link>
+      <pubDate>Sun, 12 Apr 2026 16:56:02 +0100</pubDate>
+      
+      <guid>https://pagrim.github.io/post/fzf/</guid>
+      <description>&lt;p&gt;I think this one&amp;rsquo;s a game changer for terminal users. FZF is a fuzzy finder for any kind of list, so in other words can help you to filter a list to items similar but not exactly the same as what you&amp;rsquo;re searching for. Very significantly, this also means you can search any part of the list of things that you&amp;rsquo;re searching through for your query string.&lt;/p&gt;
+&lt;p&gt;Here are the two big problems that I think this solves:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Easily finding files when I&amp;rsquo;m not sure exactly which directory they&amp;rsquo;re in.&lt;/li&gt;
+&lt;li&gt;Finding a past command when I can only recall part of the command&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;finding-files&#34;&gt;Finding Files&lt;/h2&gt;
+&lt;p&gt;This is the biggest win in my opinion. Yes, there is a &lt;code&gt;find&lt;/code&gt; command, but it&amp;rsquo;s slow and the syntax is verbose. Normally in this scenario I would probably use some combination of &lt;code&gt;cd&lt;/code&gt;, &lt;code&gt;ls&lt;/code&gt; and &lt;code&gt;tree&lt;/code&gt;, or maybe &lt;code&gt;find&lt;/code&gt; if I got a bit stuck. With &lt;code&gt;fzf&lt;/code&gt; all you need to do is hit &lt;code&gt;Ctrl + T&lt;/code&gt; and you&amp;rsquo;ll be able to search through the subfolders of the current directory with fuzzy matching. Even better, you can use this in the middle of a command. For example, let&amp;rsquo;s say I&amp;rsquo;m working with a massive code repository like &lt;a href=&#34;https://github.com/ray-project/ray&#34;&gt;Ray&lt;/a&gt;, which is a framework for distributed ML compute. It contains 11733 files and directories as of today. In the example below I&amp;rsquo;m looking for files related to serialization.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;imgs/file_search.png&#34; alt=&#34;File search example&#34;&gt;&lt;/p&gt;
+&lt;p&gt;We get results from many different parts of the code repo. All we need to do is select the file and hit &amp;rsquo;enter&amp;rsquo; and bingo, it&amp;rsquo;s full path is on our terminal line. We can continue editing my command before we run it, which means this interferes minimally with the flow of work.&lt;/p&gt;
+&lt;h2 id=&#34;reverse-search&#34;&gt;Reverse Search&lt;/h2&gt;
+&lt;p&gt;You might have been using the built-in reverse search in Mac or Linux in which case this will be an upgrade, or if not this will be a massive win. Just like the built-in reverse search you can hit &lt;code&gt;Ctrl + R&lt;/code&gt; to enter this mode and start typing the command you&amp;rsquo;re looking for. This is now searching through your shell history, but unlike the built-in reverse search you&amp;rsquo;re using fuzzy search to do this. Not only that but you can search every part of the command. Here&amp;rsquo;s an example of searching my history for commands related to fzf&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;imgs/reverse_search.png&#34; alt=&#34;Reverse search example&#34;&gt;&lt;/p&gt;
+&lt;p&gt;We can see that we get results where fzf is in different parts of the command, and it&amp;rsquo;s really easy to select whic one to use.&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;There are other things you can do with fzf, for example you can use the output of fzf directly like in the command numbered 478 above. This would open up the selected file in &lt;code&gt;vi&lt;/code&gt; directly. Personally I don&amp;rsquo;t find this so smooth and would prefer to get the file in the terminal because I can edit the path or the overall command if needed.&lt;/p&gt;
+&lt;p&gt;Check out the &lt;a href=&#34;https://github.com/junegunn/fzf&#34;&gt;github page for fzf here&lt;/a&gt; which has installation instructions. Happy fuzzy finding!&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>ML Inference with BentoML</title>
       <link>https://pagrim.github.io/post/bentoml-chronos/</link>
@@ -165,17 +191,17 @@ python write_tf_graph.py frozen_east_text_detection.pb
 tensorboard --logdir logs
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This should start tensorboard as a local webserver running on &lt;code&gt;http://localhost:6006/&lt;/code&gt;. If you navigate to that address in your web browser you should be able to see the frozen east text detection model visualised as a graph in tensorboard.&lt;/p&gt;
 &lt;p&gt;In the tensorboard UI, it&amp;rsquo;s easy to navigate the graph and search for the nodes, for example you can search for the node named &lt;code&gt;feature_fusion/Conv_7/Sigmoid&lt;/code&gt; and tensorboard will highlight this for you.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/tensorflow-graphs/imgs/tb_search.png&#34;
-    alt=&#34;Search TF Graph&#34; width=&#34;300&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Search TF Graph in Tensorboard&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/tb_search.png&#34;
+         alt=&#34;Search TF Graph&#34; width=&#34;300&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Search TF Graph in Tensorboard&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;You can quickly see that the model is composed of a feature extraction component (in this case resnet50) and a feature fusion component. From looking at the original paper and the tensorflow graph we can see that this node is in the output layer and produces the scores. It&amp;rsquo;s more difficult to see what the &lt;code&gt;feature_fusion/concat_3&lt;/code&gt; node is doing, but it seems to produce the geometry outputs according the triton tutorial and we can see from the graph that this is an output node.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/tensorflow-graphs/imgs/east_output_score_component.png&#34;
-    alt=&#34;Output Component&#34; width=&#34;600&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Output component&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/east_output_score_component.png&#34;
+         alt=&#34;Output Component&#34; width=&#34;600&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Output component&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
@@ -219,10 +245,10 @@ tensorboard --logdir logs
 &lt;p&gt;In each iteration we pop the two smallest frequencies from the MinHeap, so in our very first iteration that&amp;rsquo;s &lt;code&gt;HN(a, 5)&lt;/code&gt; and &lt;code&gt;HN(b, 9)&lt;/code&gt;. We combine the sum of the frequencies into a new object, call it &lt;code&gt;n1&lt;/code&gt;. Additionally we set the smallest of our two popped nodes as the left and the largest as the right. So we create a new object &lt;code&gt;HN(n1, 14, left=HN(a, 5), right=HN(b, 9))&lt;/code&gt; and push it back to the MinHeap. Maybe you can see the idea for how we are implicitly building the tree.&lt;/p&gt;
 &lt;p&gt;We repeat this process, in the second iteration combining &lt;code&gt;HN(c, 12)&lt;/code&gt; and &lt;code&gt;HN(d, 13)&lt;/code&gt; into &lt;code&gt;HN(25, n2, left=HN(c, 12), right=HN(d, 13))&lt;/code&gt;. We continue doing this, also combining any of the new &amp;rsquo;n&amp;rsquo; tuples.&lt;/p&gt;
 &lt;p&gt;Eventually, there will only be one node left, this will be the root of our tree. So, you can see that in each iteration we are building &amp;lsquo;mini-trees&amp;rsquo; of three nodes and the parent node is pushed to the MinHeap so that it will later become a child node elsewhere.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/huffman-encoding/imgs/graph.png&#34;
-    alt=&#34;Example Tree&#34; width=&#34;600&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Example Tree&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/graph.png&#34;
+         alt=&#34;Example Tree&#34; width=&#34;600&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Example Tree&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h2 id=&#34;encoding-characters&#34;&gt;Encoding Characters&lt;/h2&gt;
@@ -258,42 +284,42 @@ tensorboard --logdir logs
 &lt;li&gt;A frame bag or handlebar bag for small items. This last-minute purchase from Halfords worked really well&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;All of these took a while in various ways, but I&amp;rsquo;m quite happy with everything I planned!&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/bike.jpg&#34;
-    alt=&#34;The bike after adaptations&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;The final product after alterations&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/bike.jpg&#34;
+         alt=&#34;The bike after adaptations&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;The final product after alterations&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h2 id=&#34;the-tour&#34;&gt;The Tour&lt;/h2&gt;
 &lt;p&gt;My aim was to ride from home (West London) to Bath (south-west of the UK) following an adapted version of national cycle route four, which is about 140 miles in total. The route meandered around south London, roughly following the river Thames, before reaching Windsor, then wound towards Reading in a roundabout-fashion, before heading more directly West along the Kennet and Avon Canal. I camped overnight twice, once at Windsor and once around Pewsey in Wiltshire, which meant that the first and third days were around 40 miles while the second day was around 60 miles.&lt;/p&gt;
 &lt;h3 id=&#34;day-1-west-london---maidenhead&#34;&gt;Day 1: West London - Maidenhead&lt;/h3&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/starting.jpg&#34;
-    alt=&#34;Starting out&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Starting out&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/starting.jpg&#34;
+         alt=&#34;Starting out&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Starting out&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;I was a bit nervous when starting as I had put lots of effort into planning! I had tested every part of it, but not all of it together. To use a software engineering analogy, I had run unit tests but no integration tests! In the end, I had no issues.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/kingston.jpg&#34;
-    alt=&#34;Thames at Kingston&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;The river Thames at Kingston&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/kingston.jpg&#34;
+         alt=&#34;Thames at Kingston&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;The river Thames at Kingston&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;The route started out through some nice areas like Richmond Park and then joined the Thames at Kingston. It was pretty uneventful and pleasant until I encountered a steep lane that very quickly became steeper, narrower and rockier&amp;hellip; I tried battling my way up but unfortunately, the bike, the panniers and I eventually went tumbling into the side of the lane and my knee took a hit. Luckily I had everything I needed carry on (antisceptic wipe, dressing and some tape), so pushed the bike to the top of the hill and sorted out my wounds. I pedalled onwards at the top of the hill, gingerly at first. Nevertheless, I continued through Weybridge, Egham and Windsor and then around the rowing lake at Dorney reach until I was almost at Maidenhead. I was lucky to go through lots of beautiful areas on a very sunny day, including Richmond Park, and most places along the Thames but the nicest one was Windsor Great Park, which included an amazing view down to Windsor Castle from the Park along the Long Walk.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/windsor_castle.jpg&#34;
-    alt=&#34;Windsor Castle from the Long Walk&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Windsor Castle from the Long Walk&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/windsor_castle.jpg&#34;
+         alt=&#34;Windsor Castle from the Long Walk&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Windsor Castle from the Long Walk&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;I realised on the first evening that I really loved the sense of freedom from carrying everything on a bike. Camping also gave me a sense of freedom and a bit of nostalgia since I hadn&amp;rsquo;t done that for such a long time! I stopped at Amerden Caravan Park, which had really great facilities including charging points and showers.&lt;/p&gt;
 &lt;h3 id=&#34;day-2&#34;&gt;Day 2&lt;/h3&gt;
 &lt;p&gt;I decided not to bring any cooking equipment with me. This did mean that couldn&amp;rsquo;t have any tea in the morning (very British problem), so I was happy to take a tea break in the centre of Reading where the Olympics was also being screened.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/reading.jpg&#34;
-    alt=&#34;Olympics at Reading town centre&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Olympics at Reading town centre&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/reading.jpg&#34;
+         alt=&#34;Olympics at Reading town centre&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Olympics at Reading town centre&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;I knew this day would be quite a long ride, but it felt quite a bit shorter since I met a nice guy called Max, shortly after joining the Kennet and Avon canal at Reading. He had cycled from Germany through the Netherlands to the UK, and was making his way from Dover to Bristol, cycling much of this barefoot! We were heading the same way, so cycled together and over the next Day and a half, he told me about his experiences of cycling across Europe, including being threatened by a Dutch farmer when wild camping! He was an expert in bike mechanics and also really good at making friends.&lt;/p&gt;
@@ -302,35 +328,35 @@ tensorboard --logdir logs
 &lt;h3 id=&#34;day-3&#34;&gt;Day 3&lt;/h3&gt;
 &lt;p&gt;I parted ways with Max in the morning as he planned to read and stay at the campsite a bit longer, after having some interesting discussions about the &lt;em&gt;Gewaltfreiekommunikation&lt;/em&gt; (violence-free communication) book he was reading, and also about cycling routes in Scotland guided by the guy who had cycled everywhere!&lt;/p&gt;
 &lt;p&gt;I was happy that this day&amp;rsquo;s route was a bit less onerous. I made a stop in the morning at the &lt;a href=&#34;https://en.wikipedia.org/wiki/Caen_Hill_Locks&#34;&gt;Caen Hill locks&lt;/a&gt; near Devizes, which are 29 locks in a row. I was happy to be going downhill, uphill looked pretty hard work there!&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/caen_hill.jpg&#34;
-    alt=&#34;Near the top of Caen Hill Locks&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Near the top of Caen Hill Locks&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/caen_hill.jpg&#34;
+         alt=&#34;Near the top of Caen Hill Locks&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Near the top of Caen Hill Locks&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;The route was extremely picturesque, helped by the very sunny weather again, passing through places like Bradford upon Avon, and the Dundas aqueduct, and then I knew I was getting close to my final destination when I reached a place called Bathampton.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/dundas_top.jpg&#34;
-    alt=&#34;Dundas Aqueduct&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;At the top of Dundas Aqueduct&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/dundas_top.jpg&#34;
+         alt=&#34;Dundas Aqueduct&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;At the top of Dundas Aqueduct&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/dundas_view.jpg&#34;
-    alt=&#34;Dundas Aqueduct&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;View from Dundas Aqueduct&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/dundas_view.jpg&#34;
+         alt=&#34;Dundas Aqueduct&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;View from Dundas Aqueduct&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Eventually I reached a point where the towpath started going in and out of quite narrow tunnels and more people appeared, which was difficult to negotiate with a bike loaded with luggage. Then I realised with surprise and happiness that I must be in the centre of Bath and actually I needed to find a way off the towpath towards the centre and my final destination. A few minutes later I was grateful to reach the pretty Pulteney Bridge in Bath&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/bridge.jpg&#34;
-    alt=&#34;Pulteney Bridge at Bath&#34; width=&#34;400&#34;&gt;&lt;figcaption&gt;
-      &lt;p&gt;Pulteney Bridge at Bath&lt;/p&gt;
-    &lt;/figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/bridge.jpg&#34;
+         alt=&#34;Pulteney Bridge at Bath&#34; width=&#34;400&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;Pulteney Bridge at Bath&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Shortly afterwards I stopped for a celebratory smoothie opposite my final destination of Bath Spa train station (again, it was a very hot day), feeling elated to have completed my tour! Unfortunately I didn&amp;rsquo;t realise I some melted chocolate from a flapjack was still on my face from earlier in the day. I decided to post the picture here anyway as a complete representation of the moment!&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://pagrim.github.io/post/bike-tour/imgs/smoothie.jpg&#34;
-    alt=&#34;Smoothie opposite Bath Spa station&#34; width=&#34;400&#34;&gt;
+&lt;figure&gt;&lt;img src=&#34;imgs/smoothie.jpg&#34;
+         alt=&#34;Smoothie opposite Bath Spa station&#34; width=&#34;400&#34;/&gt;
 &lt;/figure&gt;
 
 </description>

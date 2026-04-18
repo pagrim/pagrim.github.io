@@ -33,7 +33,7 @@
     <link rel="icon" type="image/svg" href='https://pagrim.github.io/img/logo.png' />
     <meta name="author" content='peter_grimshaw'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.126.2">
+    <meta name="generator" content="Hugo 0.123.7">
     
     <link rel="stylesheet" href="https://pagrim.github.io/sass/main.min.6d1dbc00bf6446a1d87f69d53b9d5a9b4911c47b714ee42a3822de3f13d959f3.css" type="text/css" media="screen">
 
@@ -147,10 +147,10 @@
 <p>In each iteration we pop the two smallest frequencies from the MinHeap, so in our very first iteration that&rsquo;s <code>HN(a, 5)</code> and <code>HN(b, 9)</code>. We combine the sum of the frequencies into a new object, call it <code>n1</code>. Additionally we set the smallest of our two popped nodes as the left and the largest as the right. So we create a new object <code>HN(n1, 14, left=HN(a, 5), right=HN(b, 9))</code> and push it back to the MinHeap. Maybe you can see the idea for how we are implicitly building the tree.</p>
 <p>We repeat this process, in the second iteration combining <code>HN(c, 12)</code> and <code>HN(d, 13)</code> into <code>HN(25, n2, left=HN(c, 12), right=HN(d, 13))</code>. We continue doing this, also combining any of the new &rsquo;n&rsquo; tuples.</p>
 <p>Eventually, there will only be one node left, this will be the root of our tree. So, you can see that in each iteration we are building &lsquo;mini-trees&rsquo; of three nodes and the parent node is pushed to the MinHeap so that it will later become a child node elsewhere.</p>
-<figure><img src="/post/huffman-encoding/imgs/graph.png"
-    alt="Example Tree" width="600"><figcaption>
-      <p>Example Tree</p>
-    </figcaption>
+<figure><img src="imgs/graph.png"
+         alt="Example Tree" width="600"/><figcaption>
+            <p>Example Tree</p>
+        </figcaption>
 </figure>
 
 <h2 id="encoding-characters">Encoding Characters</h2>
