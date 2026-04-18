@@ -3,12 +3,11 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>fzf - The Fuzzy Finder | Peter Grimshaw&#39;s Site</title>
-    <meta name="description" content="fzf - The Fuzzy Finder">
-    <meta property="og:site_name" content="fzf - The Fuzzy Finder" />
+    <title>Terminal | Peter Grimshaw&#39;s Site</title>
+    <meta name="description" content="Terminal">
+    <meta property="og:site_name" content="Terminal" />
     <meta property="og:title" content="Peter Grimshaw&#39;s Site" />
-    <meta property="og:description" content="I think this one&amp;rsquo;s a game changer for terminal users. FZF is a fuzzy finder for any kind of list, so in other words can help you to filter a list to items similar but not exactly the same as what you&amp;rsquo;re searching for. Very significantly, this also means you can search any part of the list of things that you&amp;rsquo;re searching through for your query string.
-Here are the two big problems that I think this solves:" />
+    <meta property="og:description" content="" />
     <meta property="og:image" content="https://pagrim.github.io/img/peter.jpg" />
     <meta name="keywords"
           content="" />
@@ -43,6 +42,8 @@ Here are the two big problems that I think this solves:" />
     
 
     
+    
+    <link rel="alternate" type="application/rss+xml" href="https://pagrim.github.io/tags/terminal/index.xml" title="Peter Grimshaw's Site" />
     </head>
 <body>
       <div class="line" id="scrollIndicator"></div>
@@ -97,49 +98,38 @@ Here are the two big problems that I think this solves:" />
   });
 </script>
 
-<section class="intro">
-  
-  <div class="post-header">
-    <a class="go-back" href="https://pagrim.github.io/"><svg aria-hidden="true" focusable="false" data-prefix="far" class="back-icon" data-icon="caret-square-left" height="25px" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M272 157.1v197.8c0 10.7-13 16.1-20.5 8.5l-98.3-98.9c-4.7-4.7-4.7-12.2 0-16.9l98.3-98.9c7.5-7.7 20.5-2.3 20.5 8.4zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg> </a>
-    <h2 class="post-title">fzf - The Fuzzy Finder</h2>
-</div>
-
-<p class="post-dets">Published on: April 12, 2026
-  | Reading Time: 3 min | Last Modified: April 12, 2026
-  <br>
-</p>
-<span class="tags">
-  
-  <h5><a class="tag" href='https://pagrim.github.io/tags/fuzzy%20search'>fuzzy search</a></h5>
-  
-  <h5><a class="tag" href='https://pagrim.github.io/tags/terminal'>terminal</a></h5>
-  
-  <h5><a class="tag" href='https://pagrim.github.io/tags/productivity'>productivity</a></h5>
-  
-</span>
-
-<div class="content">
-  <p>I think this one&rsquo;s a game changer for terminal users. FZF is a fuzzy finder for any kind of list, so in other words can help you to filter a list to items similar but not exactly the same as what you&rsquo;re searching for. Very significantly, this also means you can search any part of the list of things that you&rsquo;re searching through for your query string.</p>
-<p>Here are the two big problems that I think this solves:</p>
-<ol>
-<li>Easily finding files when I&rsquo;m not sure exactly which directory they&rsquo;re in.</li>
-<li>Finding a past command when I can only recall part of the command</li>
-</ol>
-<h2 id="finding-files">Finding Files</h2>
-<p>This is the biggest win in my opinion. Yes, there is a <code>find</code> command, but it&rsquo;s slow and the syntax is verbose. Normally in this scenario I would probably use some combination of <code>cd</code>, <code>ls</code> and <code>tree</code>, or maybe <code>find</code> if I got a bit stuck. With <code>fzf</code> all you need to do is hit <code>Ctrl + T</code> and you&rsquo;ll be able to search through the subfolders of the current directory with fuzzy matching. Even better, you can use this in the middle of a command. For example, let&rsquo;s say I&rsquo;m working with a massive code repository like <a href="https://github.com/ray-project/ray">Ray</a>, which is a framework for distributed ML compute. It contains 11733 files and directories as of today. In the example below I&rsquo;m looking for files related to serialization.</p>
-<p><img src="imgs/file_search.png" alt="File search example"></p>
-<p>We get results from many different parts of the code repo. All we need to do is select the file and hit &rsquo;enter&rsquo; and bingo, it&rsquo;s full path is on our terminal line. We can continue editing my command before we run it, which means this interferes minimally with the flow of work.</p>
-<h2 id="reverse-search">Reverse Search</h2>
-<p>You might have been using the built-in reverse search in Mac or Linux in which case this will be an upgrade, or if not this will be a massive win. Just like the built-in reverse search you can hit <code>Ctrl + R</code> to enter this mode and start typing the command you&rsquo;re looking for. This is now searching through your shell history, but unlike the built-in reverse search you&rsquo;re using fuzzy search to do this. Not only that but you can search every part of the command. Here&rsquo;s an example of searching my history for commands related to fzf</p>
-<p><img src="imgs/reverse_search.png" alt="Reverse search example"></p>
-<p>We can see that we get results where fzf is in different parts of the command, and it&rsquo;s really easy to select whic one to use.</p>
-<h1 id="conclusion">Conclusion</h1>
-<p>There are other things you can do with fzf, for example you can use the output of fzf directly like in the command numbered 478 above. This would open up the selected file in <code>vi</code> directly. Personally I don&rsquo;t find this so smooth and would prefer to get the file in the terminal because I can edit the path or the overall command if needed.</p>
-<p>Check out the <a href="https://github.com/junegunn/fzf">github page for fzf here</a> which has installation instructions. Happy fuzzy finding!</p>
-
-</div>
-
-</section>
+<br>
+	<div style="display:flex;align-items:center;">
+		<a class="go-back" href="https://pagrim.github.io/"><svg aria-hidden="true" focusable="false" data-prefix="far" class="back-icon" data-icon="caret-square-left" height="25px" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M272 157.1v197.8c0 10.7-13 16.1-20.5 8.5l-98.3-98.9c-4.7-4.7-4.7-12.2 0-16.9l98.3-98.9c7.5-7.7 20.5-2.3 20.5 8.4zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5
+						21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6
+						6h340c3.3 0 6-2.7 6-6z"></path></svg> </a>
+	<h2 class="post-title">Terminal</h2>
+	</div>
+        
+        
+          
+            <div class="post-item">
+              
+                <well class="well">
+                  <h3><a class="link" href="https://pagrim.github.io/post/fzf/">fzf - The Fuzzy Finder</a>
+                    
+                    <h4>April 12, 2026 | Reading Time: 3 min </h4>
+                    <span class="tags">
+                        
+                        <h5><a class="tag" href='https://pagrim.github.io/tags/fuzzy%20search'>fuzzy search</a></h5>
+                        
+                        <h5><a class="tag" href='https://pagrim.github.io/tags/terminal'>terminal</a></h5>
+                        
+                        <h5><a class="tag" href='https://pagrim.github.io/tags/productivity'>productivity</a></h5>
+                        
+                    </span>
+                    <p>I think this one&rsquo;s a game changer for terminal users. FZF is a fuzzy finder for any kind of list, so in other words can help you to filter a list to items similar but not exactly the same as what you&rsquo;re searching for. Very significantly, this also means you can search any part of the list of things that you&rsquo;re searching through for your query string.
+Here are the two big problems that I think this solves:</p>
+                </well>
+                            
+            </div><br>
+          
+        
 <footer id="footer">
     <strong></strong>
     <div class="social">

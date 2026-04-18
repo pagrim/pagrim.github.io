@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Productivity on Peter Grimshaw&#39;s Site</title>
+    <link>https://pagrim.github.io/tags/productivity/</link>
+    <description>Recent content in Productivity on Peter Grimshaw&#39;s Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 12 Apr 2026 16:56:02 +0100</lastBuildDate>
+    <atom:link href="https://pagrim.github.io/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fzf - The Fuzzy Finder</title>
+      <link>https://pagrim.github.io/post/fzf/</link>
+      <pubDate>Sun, 12 Apr 2026 16:56:02 +0100</pubDate>
+      <guid>https://pagrim.github.io/post/fzf/</guid>
+      <description>I think this one&amp;rsquo;s a game changer for terminal users. FZF is a fuzzy finder for any kind of list, so in other words can help you to filter a list to items similar but not exactly the same as what you&amp;rsquo;re searching for. Very significantly, this also means you can search any part of the list of things that you&amp;rsquo;re searching through for your query string.&#xA;Here are the two big problems that I think this solves:</description>
+    </item>
+  </channel>
+</rss>
